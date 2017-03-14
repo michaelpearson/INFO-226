@@ -1,0 +1,15 @@
+<div>
+    <form ng-submit="$ctrl.submit()">
+        <label for="username">
+            Username:
+            <input ng-model="$ctrl.username" type="text" placeholder="Username" id="username">
+        </label>
+        <label for="password">
+            password:
+            <input ng-model="$ctrl.password" type="password" placeholder="Password" id="password">
+        </label>
+        <div ng-if="$ctrl.loggingIn">Loading...</div>
+        <div ng-if="$ctrl.loginFailed">Login failed :(</div>
+        <input type="submit" value="Login">
+    </form>
+</div>
