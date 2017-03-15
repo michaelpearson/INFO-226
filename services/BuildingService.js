@@ -1,19 +1,19 @@
-function BuildingService($timeout) {
-  this.mockBuildingData = {"buildings":	[{	"ID":	"1",	"Owner":	"Joe	Bloggs",	"Address":	"123	Some	Street" },{	"ID":	"2",	"Owner":	"Sally	Smith",	"Address":	"456	Some	Street" }]};
+function BuildingService($timeout, ApiService) {
+  var endpoint = 'https://happybuildings.sim.vuw.ac.nz/api/' + ApiService.username + '/building_dir.json';
+
+
 
   this.getBuildingData = () => {
-    return new Promise((resolve, reject) => {
-      $timeout(() => resolve(this.mockBuildingData), 500);
-    });
+    return fetch(endpoint).then(r => r.json()).then(r => r.buildings);
   };
 
   this.getBuilding = (id) => {
-    return new Promise((resolve, reject) => {
-      var building = this.mockBuildingData.buildings.filter((b) => b.ID == id);
+    return this.getBuildingData().then((buildings) => {
+      var building = buildings.filter((b) => b.ID == id);
       if(Array.isArray(building) && building.length) {
-        $timeout(() => resolve(building[0]), 500);
+        return building[0];
       } else {
-        $timeout(reject, 500);
+        throw "Building not found";
       }
     });
   }
