@@ -1,22 +1,22 @@
-var GUEST = 0;
-var MANAGER = 1;
-var OWNER = 'Owner';
-var CONTRACTOR = 3;
+var GUEST = 'guest';
+var MANAGER = 'manager';
+var OWNER = 'owner';
 
 function AuthenticationService() {
-    var loggedInType = GUEST;
-    var username = '';
+  var loggedInType = GUEST;
+  var username = '';
 
-    this.setLoggedIn = (loginType, username) => {
-        this.loggedInType = loginType;
-        this.username = username;
-    }
+  this.setLoggedIn = (loginType, username) => {
+    loggedInType = loginType;
+    //localStorage.setItem('login')
+    this.username = username;
+  };
 
-    this.getLoginStatus = () => {
-        return this.loggedInType;
-    }
+  this.getLoginStatus = () => {
+    return loggedInType;
+  };
 
-    this.isLoggedIn = () => this.isLoggedIn;
+  this.isLoggedIn = () => this.isLoggedIn;
 }
 
 application.service('AuthenticationService', AuthenticationService);

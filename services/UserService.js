@@ -12,7 +12,12 @@ function UserService(ApiService, $timeout) {
 
   this.validateLogin = (username, password) => {
     return new Promise((resolve, reject) => {
-      (users.some((user) => user.LoginName == username && user.Password == password) ? resolve : reject)();
+      var user = users.filter((user) => user.LoginName == username && user.Password == password);
+      if(Array.isArray(user) && user.length) {
+        resolve(user[0]);
+      } else {
+        reject();
+      }
     });
   };
 

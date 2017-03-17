@@ -7,8 +7,11 @@ function LoginController(UserService, AuthenticationService, $state, $scope) {
   this.submit = () => {
     this.loggingIn = true;
     this.loginFailed = false;
-    UserService.validateLogin(this.username, this.password)
-      .then((userType) => AuthenticationService.setLoggedIn(userType))
+    var username = this.username;
+    var password =this.password;
+
+    UserService.validateLogin(username, password)
+      .then((user) => AuthenticationService.setLoggedIn(user.UserType, user.LoginName))
       .then(() => $state.go('buildings'))
       .catch(this.setFailedLogin);
   };

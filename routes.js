@@ -3,24 +3,46 @@ function ConfigureRoutes($stateProvider, $urlRouterProvider) {
     name: 'home',
     url: '/',
     templateUrl: 'views/Home/Home.html',
-    controller: HomeController
+    controller: HomeController,
+    authenticationLevel: ['*']
   }, {
     name: 'login',
     url: '/login',
     templateUrl: 'views/Login/Login.html',
-    controller: LoginController
+    controller: LoginController,
+    authenticationLevel: ['*']
+  }, {
+    name: 'unauthenticated',
+    url: '/loginrequired',
+    templateUrl: 'views/Unauthenticated/unauthenticated.html',
+    authenticationLevel: ['*']
   }, {
     name: 'buildings',
     url: '/buildings',
     templateUrl: 'views/Buildings/Buildings.html',
-    controller: BuildingsController
+    controller: BuildingsController,
+    authenticationLevel: [MANAGER, OWNER]
   }, {
     name: 'buildingInfo',
     url: '/building/:id/info',
     templateUrl: 'views/BuildingInfo/BuildingInfo.html',
-    controller: BuildingInfoController
+    controller: BuildingInfoController,
+    authenticationLevel: [MANAGER, OWNER]
   }];
+
   $urlRouterProvider.otherwise("/");
+  $stateProvider.decorator('data', function(state, parent) {
+    state.resolve = state.resolve || {};
+    state.resolve.security = function ($q, AuthenticationService) {
+      var required = state.authenticationLevel;
+      var status = AuthenticationService.getLoginStatus();
+      if (Array.isArray(required) && (required.includes('*') || required.some((e) => e == status))) {
+        return;
+      }
+      return $q.reject("Not Authorized");
+    };
+  });
+
   routes.forEach((e) => e.controllerAs = "$ctrl");
   routes.forEach($stateProvider.state);
 
