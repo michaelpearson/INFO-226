@@ -1,5 +1,5 @@
 <h1>Buildings Page</h1>
-<a ui-sref="home">Logout</a>
+<a ui-sref="home">Home</a>
 <p>List of buildings</p>
 <table>
     <thead>
@@ -15,7 +15,12 @@
             <td>{{ $building.ID }}</td>
             <td>{{ $building.Owner }}</td>
             <td>{{ $building.Address }}</td>
-            <td><a ui-sref="buildingInfo({ id: $building.ID })">View building information</a></td>
+            <td><a ui-sref="buildingInfo.view({ id: $building.ID })">View building information</a></td>
         </tr>
     </tbody>
 </table>
+<div class="h-align-right h-padding">
+    <button ui-sref="buildingInfo.edit({id : 'new'})" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+        New Building
+    </button>
+</div>

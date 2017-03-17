@@ -24,14 +24,35 @@ function ConfigureRoutes($stateProvider, $urlRouterProvider) {
     authenticationLevel: [MANAGER, OWNER]
   }, {
     name: 'buildingInfo',
-    url: '/building/:id/info',
-    templateUrl: 'views/BuildingInfo/BuildingInfo.html',
-    controller: BuildingInfoController,
+    abstract: true,
+    url: '/building/:id/',
+    template: '<div ui-view></div>',
+    resolve: {
+      building: function (BuildingService, $stateParams) {
+        return BuildingService.getBuilding($stateParams.id);
+      },
+      projects: function (ProjectService, $stateParams) {
+        if($stateParams.id == 'new') return [];
+        return ProjectService.getProjectsForBuilding($stateParams.id);
+      }
+    },
     authenticationLevel: [MANAGER, OWNER]
+  }, {
+    name: 'buildingInfo.view',
+    url: 'view',
+    templateUrl: 'views/BuildingInfo/View/View.html',
+    controller: BuildingViewController,
+    authenticationLevel: [MANAGER, OWNER]
+  }, {
+    name: 'buildingInfo.edit',
+    url: 'edit',
+    templateUrl: 'views/BuildingInfo/Edit/Edit.html',
+    controller: EditBuildingsController,
+    authenticationLevel: [MANAGER]
   }];
 
   $urlRouterProvider.otherwise("/");
-  $stateProvider.decorator('data', function(state, parent) {
+  $stateProvider.decorator('data', function(state) {
     state.resolve = state.resolve || {};
     state.resolve.security = function ($q, AuthenticationService) {
       var required = state.authenticationLevel;
@@ -39,6 +60,7 @@ function ConfigureRoutes($stateProvider, $urlRouterProvider) {
       if (Array.isArray(required) && (required.includes('*') || required.some((e) => e == status))) {
         return;
       }
+      console.log(required, status);
       return $q.reject("Not Authorized");
     };
   });

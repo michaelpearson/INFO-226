@@ -12,7 +12,7 @@ function LoginController(UserService, AuthenticationService, $state, $scope) {
 
     UserService.validateLogin(username, password)
       .then((user) => AuthenticationService.setLoggedIn(user.UserType, user.LoginName))
-      .then(() => $state.go('buildings'))
+      .then(() => $state.go('home'))
       .catch(this.setFailedLogin);
   };
 

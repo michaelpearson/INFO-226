@@ -20,7 +20,8 @@
         <script src="views/Home/Home.js"></script>
         <script src="views/Login/Login.js"></script>
         <script src="views/Buildings/Buildings.js"></script>
-        <script src="views/BuildingInfo/BuildingInfo.js"></script>
+        <script src="views/BuildingInfo/View/View.js"></script>
+        <script src="views/BuildingInfo/Edit/Edit.js"></script>
 
         <!-- Services -->
         <script src="services/UserService.js"></script>
@@ -34,13 +35,19 @@
 
     </head>
 
-    <body ng-app="myApplication">
+    <body ng-app="myApplication" ng-controller="applicationController as $ctrl">
         <div class="happy-buildings-layout mdl-layout mdl-layout--fixed-header mdl-js-layout mdl-color--grey-100">
-            <header ui-sref="home" class="demo-header mdl-layout__header mdl-layout__header--scroll mdl-color--grey-100 mdl-color-text--grey-800">
+            <header class="demo-header mdl-layout__header mdl-layout__header--scroll mdl-color--grey-100 mdl-color-text--grey-800">
                 <div class="mdl-layout__header-row">
-                    <span class="mdl-layout-title">
+                    <span class="h-cursor-pointer mdl-layout-title" ui-sref="home">
                         Happy Buildings
                     </span>
+                    <div class="mdl-layout-spacer"></div>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable is-upgraded">
+                    <span class="h-cursor-pointer" ng-click="$ctrl.logout()">
+                        Logout {{ $ctrl.test }}
+                    </span>
+                    </div>
                 </div>
             </header>
             <div class="demo-ribbon"></div>

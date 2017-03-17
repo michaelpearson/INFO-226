@@ -12,7 +12,6 @@
 
 .demo-header .mdl-layout__header-row {
     padding-left: 40px;
-    cursor: pointer;
 }
 
 .demo-container {
@@ -23,7 +22,7 @@
 
 .demo-content {
     border-radius: 2px;
-    padding: 20px 56px 80px;
+    padding: 20px 56px;
     margin-bottom: 80px;
 
 }
@@ -53,7 +52,23 @@
     max-width: 200px;
 }
 
-.login-field-container div {
+.h-field-container div {
     display: block;
     width: 100%;
+}
+
+.h-cursor-pointer {
+    cursor: pointer;
+}
+
+.h-align-right {
+    text-align: right;
+}
+
+.h-padding {
+    padding: 10px;
+}
+
+.h-margin {
+    margin: 10px;
 }

@@ -12,7 +12,7 @@ function ProjectService(ApiService) {
     return Promise
         .all(projectPromises)
         .then(() => resolvedProjects.filter(p => p.BuildingID == buildingId))
-        .then((projects) => Array.isArray(projects) ? projects[0] : []);
+        .then((projects) => Array.isArray(projects) ? projects : []);
   };
 }
 

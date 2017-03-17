@@ -3,9 +3,10 @@
         Happy Buildings
     </h1>
     <div>
-        <p>Welcome to the Happy Buildings project managment system. To get started click login below!</p>
+        <p>Welcome to the Happy Buildings project management system. To get started click below!</p>
         <div class="home-login-button-container">
-            <button ui-sref="login" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Login</button>
+            <button ng-if="!$ctrl.loggedIn" ui-sref="login" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Login</button>
+            <button ng-if="$ctrl.loggedIn" ui-sref="buildings" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Building directory</button>
         </div>
     </div>
 </div>
