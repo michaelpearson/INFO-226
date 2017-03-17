@@ -1,7 +1,7 @@
-function ConfigureRoutes($stateProvider) {
+function ConfigureRoutes($stateProvider, $urlRouterProvider) {
   var routes = [{
     name: 'home',
-    url: '',
+    url: '/',
     templateUrl: 'views/Home/Home.html',
     controller: HomeController
   }, {
@@ -20,7 +20,8 @@ function ConfigureRoutes($stateProvider) {
     templateUrl: 'views/BuildingInfo/BuildingInfo.html',
     controller: BuildingInfoController
   }];
-
+  $urlRouterProvider.otherwise("/");
   routes.forEach((e) => e.controllerAs = "$ctrl");
   routes.forEach($stateProvider.state);
+
 }

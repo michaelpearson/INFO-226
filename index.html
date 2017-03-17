@@ -3,9 +3,14 @@
     <head>
         <link rel="stylesheet" href="css/style.css" />
 
-        <!-- Libraries -->
+        <!-- Angular -->
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
         <script src="https://unpkg.com/angular-ui-router@0.4.2/release/angular-ui-router.min.js"></script>
+
+        <!-- material design light -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+        <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 
         <!-- Bootstrap -->
         <script src="index.js"></script>
@@ -24,10 +29,36 @@
         <script src="services/ApiService.js"></script>
         <script src="services/AuthenticationService.js"></script>
 
+        <!-- Viewport for mobile devices -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     </head>
 
     <body ng-app="myApplication">
-        <ui-view></ui-view>
+        <div class="happy-buildings-layout mdl-layout mdl-layout--fixed-header mdl-js-layout mdl-color--grey-100">
+            <header ui-sref="home" class="demo-header mdl-layout__header mdl-layout__header--scroll mdl-color--grey-100 mdl-color-text--grey-800">
+                <div class="mdl-layout__header-row">
+                    <span class="mdl-layout-title">
+                        Happy Buildings
+                    </span>
+                </div>
+            </header>
+            <div class="demo-ribbon"></div>
+            <div class="demo-main mdl-layout__content">
+                <div class="demo-container mdl-grid">
+                    <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
+                    <div class="demo-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col">
+                        <ui-view></ui-view>
+                    </div>
+                </div>
+            </div>
+            <footer class="demo-footer mdl-mini-footer">
+                <div class="mdl-mini-footer--left-section">
+                    <ul class="mdl-mini-footer--link-list">
+                        <li><a ui-sref="home">Home</a></li>
+                    </ul>
+                </div>
+            </footer>
+        </div>
     </body>
-
 </html>

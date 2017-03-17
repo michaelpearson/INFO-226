@@ -1,5 +1,59 @@
-label {
-    display: block;
-    padding: 10px;
+.demo-ribbon {
+    width: 100%;
+    height: 40vh;
+    background-color: #3F51B5;
+    flex-shrink: 0;
 }
 
+.demo-main {
+    margin-top: -35vh;
+    flex-shrink: 0;
+}
+
+.demo-header .mdl-layout__header-row {
+    padding-left: 40px;
+    cursor: pointer;
+}
+
+.demo-container {
+    max-width: 1600px;
+    width: calc(100% - 16px);
+    margin: 0 auto;
+}
+
+.demo-content {
+    border-radius: 2px;
+    padding: 20px 56px 80px;
+    margin-bottom: 80px;
+
+}
+
+.happy-buildings-layout.is-small-screen .demo-content {
+    padding: 40px 28px;
+}
+
+.demo-content h3 {
+    margin-top: 48px;
+}
+
+.demo-footer {
+    padding-left: 40px;
+}
+
+.demo-footer .mdl-mini-footer--link-list a {
+    font-size: 13px;
+}
+
+.home-login-button-container {
+    text-align: center;
+}
+
+.home-login-button-container button {
+    width: 50%;
+    max-width: 200px;
+}
+
+.login-field-container div {
+    display: block;
+    width: 100%;
+}
