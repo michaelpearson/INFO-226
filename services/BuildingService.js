@@ -36,7 +36,7 @@ function BuildingService($timeout, ApiService) {
       headers: {
         "Content-Type": 'application/json'
       }
-    });
+    }).then(r => building);
   };
 }
 
