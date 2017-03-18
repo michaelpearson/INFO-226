@@ -1,9 +1,10 @@
 var application = angular
   .module('myApplication', ['ui.router'])
   .controller('applicationController', function (AuthenticationService,$state) {
+    this.loggedIn = () => AuthenticationService.isLoggedIn();
     this.logout = () => {
       AuthenticationService.logout();
-      $state.go('home');
+      $state.go('home', {}, {reload: true});
     };
   })
   .config(function ($stateProvider, $urlRouterProvider) {

@@ -1,3 +1,7 @@
+.happy-buildings-layout {
+    min-width: 450px;
+}
+
 .demo-ribbon {
     width: 100%;
     height: 40vh;
@@ -29,6 +33,7 @@
 
 .happy-buildings-layout.is-small-screen .demo-content {
     padding: 40px 28px;
+    min-width: 500px;
 }
 
 .demo-content h3 {
@@ -65,10 +70,26 @@
     text-align: right;
 }
 
-.h-padding {
-    padding: 10px;
-}
+.h-padding { padding: 20px; }
+.h-padding-left { padding-left: 20px; }
+.h-padding-right { padding-right: 20px; }
+.h-padding-top { padding-top: 20px; }
+.h-padding-bottom { padding-bottom: 20px; }
 
 .h-margin {
     margin: 10px;
+}
+
+.h-full-width {
+    width: 100%;
+}
+
+.wrap {
+    white-space: normal;
+}
+.breadcrumb-container {
+    margin: -10px 0 20px 0;
+}
+.h-center {
+    text-align: center !important;
 }

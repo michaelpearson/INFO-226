@@ -1,5 +1,9 @@
 <form ng-submit="$ctrl.submit()" class="login">
     <h1>Login</h1>
+    <div class="breadcrumb-container">
+        <a ui-sref="home">Home</a> >
+        <a ui-sref="login">Login</a>
+    </div>
     <h4>Please enter your login details</h4>
     <div class="h-field-container" ng-if="!$ctrl.loggingIn">
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">

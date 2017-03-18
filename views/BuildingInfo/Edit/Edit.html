@@ -1,4 +1,11 @@
 <h1>{{ $ctrl.isNew ? 'New building' : 'Edit building'}}</h1>
+<div class="breadcrumb-container">
+    <a ui-sref="home">Home</a> >
+    <a ui-sref="buildings">Building directory</a> >
+    <a ng-if="$ctrl.building.ID == 'new'" ui-sref="buildingInfo.edit({id: $ctrl.building.ID})">New building</a>
+    <a ng-if="$ctrl.building.ID != 'new'" ui-sref="buildingInfo.view({id: $ctrl.building.ID})">Building {{ $ctrl.building.ID }}</a> >
+    <a ui-sref="buildingInfo.edit({id: $ctrl.building.ID})">Edit</a>
+</div>
 <div class="h-field-container">
     <form ng-submit="$ctrl.save()">
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">

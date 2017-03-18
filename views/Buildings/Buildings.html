@@ -1,25 +1,31 @@
-<h1>Buildings Page</h1>
-<a ui-sref="home">Home</a>
-<p>List of buildings</p>
-<table>
+<h1>Building directory</h1>
+<div class="breadcrumb-container">
+    <a ui-sref="home">Home</a> > <a ui-sref="buildings">Building directory</a>
+</div>
+<h6>Select the building you would like to view or modify below. Or click 'New building' to create a new building</h6>
+<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp h-full-width">
     <thead>
         <tr>
-            <td>Building ID</td>
-            <td>Owner</td>
-            <td>Address</td>
-            <td></td>
+            <th>Building ID</th>
+            <th class="mdl-data-table__cell--non-numeric">Owner</th>
+            <th class="mdl-data-table__cell--non-numeric">Address</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
         <tr ng-repeat="$building in $ctrl.buildings">
             <td>{{ $building.ID }}</td>
-            <td>{{ $building.Owner }}</td>
-            <td>{{ $building.Address }}</td>
-            <td><a ui-sref="buildingInfo.view({ id: $building.ID })">View building information</a></td>
+            <td class="mdl-data-table__cell--non-numeric wrap">{{ $building.Owner }}</td>
+            <td class="mdl-data-table__cell--non-numeric wrap">{{ $building.Address }}</td>
+            <td class="mdl-data-table__cell--non-numeric">
+                <button ui-sref="buildingInfo.view({ id: $building.ID })" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                    View
+                </button>
+            </td>
         </tr>
     </tbody>
 </table>
-<div class="h-align-right h-padding">
+<div class="h-align-right h-padding-top">
     <button ui-sref="buildingInfo.edit({id : 'new'})" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
         New Building
     </button>

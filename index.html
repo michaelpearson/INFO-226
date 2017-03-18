@@ -44,9 +44,12 @@
                     </span>
                     <div class="mdl-layout-spacer"></div>
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable is-upgraded">
-                    <span class="h-cursor-pointer" ng-click="$ctrl.logout()">
-                        Logout {{ $ctrl.test }}
-                    </span>
+                        <span ng-if="$ctrl.loggedIn()" class="h-cursor-pointer" ng-click="$ctrl.logout()">
+                            Logout
+                        </span>
+                        <span ng-if="!$ctrl.loggedIn()" class="h-cursor-pointer" ui-sref="login">
+                            Login
+                        </span>
                     </div>
                 </div>
             </header>

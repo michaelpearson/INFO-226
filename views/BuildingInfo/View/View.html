@@ -1,38 +1,47 @@
-<h1>Building info</h1>
-<a ui-sref="buildings">Back to building list</a>
-<p>Owner: {{ $ctrl.building.Owner }}</p>
-<p>Address: {{ $ctrl.building.Address }}</p>
-<p>Projects:</p>
-<table>
-    <thead>
-    <tr>
-        <td>ID</td>
-        <td>Name</td>
-        <td>Status</td>
-        <td>Start Date</td>
-        <td>End Date</td>
-        <td>Contact Person</td>
-        <td>Project Manager</td>
-        <td>Contractor</td>
-        <td></td>
-    </tr>
-    </thead>
-    <tbody>
-    <tr ng-repeat="$project in $ctrl.projects">
-        <td>{{ $project.ID }}</td>
-        <td>{{ $project.Name }}</td>
-        <td>{{ $project.Status }}</td>
-        <td>{{ $project.StartDate }}</td>
-        <td>{{ $project.EndDate }}</td>
-        <td>{{ $project.ContactPerson }}</td>
-        <td>{{ $project.ProjectManager }}</td>
-        <td>{{ $project.Contractor }}</td>
-        <td><a ui-sref="project({id: $project.ID})">View project</a></td>
-    </tr>
-    </tbody>
-</table>
-<div class="h-align-right h-padding">
-    <button ui-sref="buildingInfo.edit({id: $ctrl.building.ID })" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-        Edit Building
-    </button>
+<h1>Building {{ $ctrl.building.ID }}</h1>
+<div class="breadcrumb-container">
+    <a ui-sref="home">Home</a> > <a ui-sref="buildings">Building directory</a> > <a ui-sref="buildingInfo.view({id: $ctrl.building.ID})">Building {{ $ctrl.building.ID }}</a>
+</div>
+<div class="building-info">
+    <h4>Building info:</h4>
+    <p>Owner: {{ $ctrl.building.Owner }}</p>
+    <p>Address: {{ $ctrl.building.Address }}</p>
+    <div class="h-align-right h-padding-top">
+        <button ui-sref="buildingInfo.edit({id: $ctrl.building.ID })" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+            Edit Building
+        </button>
+    </div>
+</div>
+<div class="project-table">
+    <h4>Associated projects:</h4>
+    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp h-full-width">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Status</th>
+            <th>End Date</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="$project in $ctrl.projects">
+            <td>{{ $project.ID }}</td>
+            <td>{{ $project.Name }}</td>
+            <td>{{ $project.Status }}</td>
+            <td>{{ $project.EndDate }}</td>
+            <td><a ui-sref="project({id: $project.ID})">View project</a></td>
+        </tr>
+        <tr ng-if="!$ctrl.projects.length">
+            <td colspan="5" class="h-center">
+                <span>No projects found</span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="h-align-right h-padding-top">
+        <button ui-sref="project.edit({id: 'new', building: $ctrl.building.ID})" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+            Add project
+        </button>
+    </div>
 </div>
