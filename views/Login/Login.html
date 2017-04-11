@@ -17,8 +17,8 @@
     </div>
 
 
-    <div ng-if="$ctrl.loggingIn">Loading...</div>
-    <div ng-if="$ctrl.loginFailed">Login failed :(</div>
+    <div ng-if="$ctrl.loggingIn" class="mdl-progress mdl-js-progress mdl-progress__indeterminate loading-bar"></div>
+    <div ng-if="$ctrl.loginFailed" class="form-error">Sorry the username or password you entered is invalid</div>
 
     <input type="button" value="Cancel" ui-sref="home" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" />
     <input type="submit" value="Login" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" />
