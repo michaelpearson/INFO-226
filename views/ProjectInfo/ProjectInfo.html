@@ -1,24 +1,38 @@
 <h1>Projects</h1>
 
-<a ui-sref="home"> Logout </a>
+<div class="breadcrumb-container">
+    <a ui-sref="home">Home</a> <a ui-sref="buildings">Building directory</a>
+</div>
+
 <h2>List of Projects</h2>
 
 <table>
     <thead>
-    <tr>Project ID</tr>
-    <tr>Name</tr>
-    <tr>BuildingID</tr>
-    <tr>Status</tr>
-    <tr>Start Date</tr>
-    <tr>End Date</tr>
-    <tr>Contact</tr>
-    <tr>Project Manager</tr>
-    <tr>Contractor</tr>
-    <tr>Works</tr>
-
+    <tr>
+        <th>Project ID</th>
+        <th class="mdl-data-table__cell--non-numeric">Name</th>
+        <th>BuildingID</th>
+        <th class="mdl-data-table__cell--non-numeric">Status</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th class="mdl-data-table__cell--non-numeric">Contact</th>
+        <th class="mdl-data-table__cell--non-numeric">Project Manager</th>
+        <th class="mdl-data-table__cell--non-numeric">Contractor</th>
+        <th class="mdl-data-table__cell--non-numeric">Comments</th>
+        </tr>
     </thead>
-    <tbody>
-        <!--Table data-->
 
+    <tbody>
+        <td>{{$Project.ID}}</td>
+        <td class="mdl-data-table__cell--non-numeric wrap">{{$Project.Name}}</td>
+        <td>{{$Project.BuildingID}}</td>
+        <td class="mdl-data-table__cell--non-numeric wrap">{{$Project.Status}}</td>
+        <td>{{$Project.StartDate}}</td>
+        <td>{{$Project.EndDate}}</td>
+        <td class="mdl-data-table__cell--non-numeric wrap">{{$Project.ContactPerson}}</td>
+        <td class="mdl-data-table__cell--non-numeric wrap">{{$Project.ProjectManager}}</td>
+        <td class="mdl-data-table__cell--non-numeric wrap">{{$Project.Contractor}}</td>
+        <!--<td>{{$Project.Works}}</td>-->
+        <td class="mdl-data-table__cell--non-numeric wrap">{{$Project.Comments}}</td>
     </tbody>
 </table>
