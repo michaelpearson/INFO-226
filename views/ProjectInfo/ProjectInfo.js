@@ -1,8 +1,9 @@
-function ProjectInfoController(ProjectService, $scope) {
-  this.projects = [];
+function ProjectInfoController(ProjectService, $scope, $stateParams) {
+  this.project = {};
 
-   this.$onInit = () => {
-    console.log('here');
-     ProjectService.getProject().then((projects) => this.projects = projects).then(() => $scope.$applyAsync())
-   }
+  this.$onInit = () => {
+    var projectId = $stateParams.projectId;
+    ProjectService.getProjects().then(projects => this.project = projects.filter(p => p.ProjectID == projectId)[0]);
+
+  }
 }

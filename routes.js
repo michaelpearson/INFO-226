@@ -23,12 +23,18 @@ function ConfigureRoutes($stateProvider, $urlRouterProvider) {
     controller: BuildingsController,
     authenticationLevel: [MANAGER, OWNER]
   }, {
-       name: 'projectInfo',
-       url: '/projectInfo',
-       templateUrl: 'views/ProjectInfo/ProjectInfo.html',
-       controller: BuildingsController,
-       authenticationLevel: [MANAGER, OWNER]
-   }];
+    name: 'projectDirectory',
+    url: '/projectDirectory',
+    templateUrl: 'views/ProjectDirectory/ProjectDirectory.html',
+    controller: ProjectDirectoryController,
+    authenticationLevel: [MANAGER, OWNER]
+  }, {
+    name: 'projectInfo',
+    url: '/projectInfo/:projectId/',
+    templateUrl: 'views/ProjectInfo/ProjectInfo.html',
+    controller: ProjectInfoController,
+    authenticationLevel: [MANAGER, OWNER]
+  }];
 
   $urlRouterProvider.otherwise("/");
   $stateProvider.decorator('data', function(state) {

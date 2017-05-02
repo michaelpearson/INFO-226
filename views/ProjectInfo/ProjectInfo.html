@@ -1,38 +1,22 @@
-<h1>Projects</h1>
+<h1>Project Info</h1>
 
 <div class="breadcrumb-container">
-    <a ui-sref="home">Home</a> <a ui-sref="buildings">Building directory</a>
+    <a ui-sref="home">Home</a> > <a ui-sref="buildings">Building directory</a>
 </div>
+<h2>Project {{$ctrl.project.ProjectID  }}</h2>
+<h4>Project Name: {{ $ctrl.project.Name }}</h4>
+<tbody>
 
-<h2>List of Projects</h2>
+<p>Name: {{ $ctrl.project.Name }}</p>
+<p>Status: {{$ctrl.project.Status}}</p>
+<p>Start Date: {{$ctrl.project.StartDate | date : 'medium'}}</p>
+<p>End Date: {{$ctrl.project.EndDate | date : 'medium'}}</p>
+<p>Building ID: {{$ctrl.project.BuildingID}}</p>
+<p>Contact Person: {{$ctrl.project.ContactPerson}}</p>
+<p>Project Manager: {{$ctrl.project.ProjectManager}}</p>
+<p>Contractors: {{$ctrl.project.Contractor}}</p>
 
-<table>
-    <thead>
-    <tr>
-        <th>Project ID</th>
-        <th class="mdl-data-table__cell--non-numeric">Name</th>
-        <th>BuildingID</th>
-        <th class="mdl-data-table__cell--non-numeric">Status</th>
-        <th>Start Date</th>
-        <th>End Date</th>
-        <th class="mdl-data-table__cell--non-numeric">Contact</th>
-        <th class="mdl-data-table__cell--non-numeric">Project Manager</th>
-        <th class="mdl-data-table__cell--non-numeric">Contractor</th>
-        <th class="mdl-data-table__cell--non-numeric">Comments</th>
-        </tr>
-    </thead>
 
-    <tbody>
-        <td>{{$Project.ID}}</td>
-        <td class="mdl-data-table__cell--non-numeric wrap">{{$Project.Name}}</td>
-        <td>{{$Project.BuildingID}}</td>
-        <td class="mdl-data-table__cell--non-numeric wrap">{{$Project.Status}}</td>
-        <td>{{$Project.StartDate}}</td>
-        <td>{{$Project.EndDate}}</td>
-        <td class="mdl-data-table__cell--non-numeric wrap">{{$Project.ContactPerson}}</td>
-        <td class="mdl-data-table__cell--non-numeric wrap">{{$Project.ProjectManager}}</td>
-        <td class="mdl-data-table__cell--non-numeric wrap">{{$Project.Contractor}}</td>
-        <!--<td>{{$Project.Works}}</td>-->
-        <td class="mdl-data-table__cell--non-numeric wrap">{{$Project.Comments}}</td>
-    </tbody>
-</table>
+
+<!--<p>Project ID: {{$Project.Works}}</p>-->
+<!--<p>Project ID: {{$Project.Comments}}</p>-->
