@@ -24,7 +24,7 @@ function ConfigureRoutes($stateProvider, $urlRouterProvider) {
     authenticationLevel: [MANAGER, OWNER]
   }, {
     name: 'projectDirectory',
-    url: '/projectDirectory',
+    url: '/projectDirectory/:buildingId/',
     templateUrl: 'views/ProjectDirectory/ProjectDirectory.html',
     controller: ProjectDirectoryController,
     authenticationLevel: [MANAGER, OWNER]
