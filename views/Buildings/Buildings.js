@@ -12,10 +12,7 @@ function BuildingsController(BuildingService, $scope, $state, AuthenticationServ
   };
 
   this.filteredBuildings = () => {
-    console.log('here');
-    return this.buildings.filter(e => (e.ID + e.Owner + e.Address).indexOf(this.filter) >= 0);
+    return this.buildings.filter(e => (e.ID + e.Owner + e.Address).toLowerCase().indexOf(this.filter.toLowerCase()) >= 0);
   };
-
-  setInterval(() => console.log(this.filter), 500);
 
 }
