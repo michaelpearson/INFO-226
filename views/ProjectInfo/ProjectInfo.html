@@ -15,8 +15,27 @@
 <p>Contact Person: {{$ctrl.project.ContactPerson}}</p>
 <p>Project Manager: {{$ctrl.project.ProjectManager}}</p>
 <p>Contractors: {{$ctrl.project.Contractor}}</p>
+<div>
+    <h4>Works</h4>
+    <!-- {"TypeOfWork": "scaffolding", "Status": "done"} -->
+    <h5>Todo</h5>
+</div>
 
+<div>
+    <h4>Comments:</h4>
+    <div class="comment-box" ng-repeat="$comment in $ctrl.project.Comments">
+        <span class="mdl-chip mdl-chip--contact">
+            <span class="mdl-chip__contact mdl-color--teal mdl-color-text--white">{{ $comment.Author | limitTo: 1 }}</span>
+            <span class="mdl-chip__text">{{ $comment.Author }}</span>
+        </span>
+        <p class="comment-text">{{ $comment.Text }}</p>
 
-
-<!--<p>Project ID: {{$Project.Works}}</p>-->
-<!--<p>Project ID: {{$Project.Comments}}</p>-->
+    </div>
+    <div class="mdl-textfield mdl-js-textfield comment-textarea">
+        <textarea class="mdl-textfield__input" type="text" rows="10" id="comment-textarea" ng-model="$ctrl.comment"></textarea>
+        <label class="mdl-textfield__label" for="comment-textarea">Enter your comment here</label>
+    </div>
+    <div class="comment-button-container">
+        <button ng-disabled="!$ctrl.comment" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" ng-click="$ctrl.doComment()">Comment</button>
+    </div>
+</div>
