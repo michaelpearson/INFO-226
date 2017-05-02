@@ -3,6 +3,6 @@ function ProjectDirectoryController(ProjectService, $scope, $stateParams) {
   this.buildingId = $stateParams.buildingId;
 
   this.$onInit = () => {
-    ProjectService.getProjects().then((projects) => this.projects = projects).then(() => $scope.$applyAsync())
+    ProjectService.getProjectsForBuilding(this.buildingId).then((projects) => this.projects = projects).then(() => $scope.$applyAsync())
   }
 }

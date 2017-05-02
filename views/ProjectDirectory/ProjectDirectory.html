@@ -8,30 +8,30 @@
 
 <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp h-full-width">
     <thead>
-    <tr>
-        <th class="mdl-data-table__cell--non-numeric">Name</th>
-        <th class="mdl-data-table__cell--non-numeric">Status</th>
-        <th>Start Date</th>
-        <th>End Date</th>
-        <th class="mdl-data-table__cell--non-numeric">Contact</th>
-        <th class="mdl-data-table__cell--non-numeric">Contractor</th>
-        <th><!-- Blank for view button --></th>
-    </tr>
+        <tr>
+            <th class="mdl-data-table__cell--non-numeric">Name</th>
+            <th class="mdl-data-table__cell--non-numeric">Status</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th class="mdl-data-table__cell--non-numeric">Contact</th>
+            <th class="mdl-data-table__cell--non-numeric">Contractor</th>
+            <th><!-- Blank for view button --></th>
+        </tr>
     </thead>
 
     <tbody>
-    <tr ng-repeat="$project in $ctrl.projects">
-        <td class="mdl-data-table__cell--non-numeric wrap">{{$project.Name}}</td>
-        <td class="mdl-data-table__cell--non-numeric wrap">{{$project.Status}}</td>
-        <td class="mdl-data-table__cell--non-numeric wrap">{{$project.StartDate}}</td>
-        <td class="mdl-data-table__cell--non-numeric wrap">{{$project.EndDate}}</td>
-        <td class="mdl-data-table__cell--non-numeric wrap">{{$project.ContactPerson}}</td>
-        <td class="mdl-data-table__cell--non-numeric wrap">{{$project.Contractor}}</td>
-        <td class="mdl-data-table__cell--non-numeric wrap">
-            <button ui-sref="projectInfo({ projectId: $project.ProjectID })" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
-                View
-            </button>
-        </td>
-    </tr>
+        <tr ng-repeat="$project in $ctrl.projects">
+            <td class="mdl-data-table__cell--non-numeric wrap">{{$project.Name}}</td>
+            <td class="mdl-data-table__cell--non-numeric wrap">{{$project.Status}}</td>
+            <td class="mdl-data-table__cell--non-numeric wrap">{{$project.StartDate}}</td>
+            <td class="mdl-data-table__cell--non-numeric wrap">{{$project.EndDate}}</td>
+            <td class="mdl-data-table__cell--non-numeric wrap">{{$project.ContactPerson}}</td>
+            <td class="mdl-data-table__cell--non-numeric wrap">{{$project.Contractor}}</td>
+            <td class="mdl-data-table__cell--non-numeric wrap">
+                <button ui-sref="projectInfo({ projectId: $project.ProjectID })" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                    View
+                </button>
+            </td>
+        </tr>
     </tbody>
 </table>

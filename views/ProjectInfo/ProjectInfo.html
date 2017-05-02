@@ -3,9 +3,9 @@
 <div class="breadcrumb-container">
     <a ui-sref="home">Home</a> > <a ui-sref="buildings">Building directory</a> > <a ui-sref="buildingInfo.view({ id: $building.ID })">Building</a> > <a ui-sref="projectDirectory({buildingId: $ctrl.project.BuildingID})">Project Directory</a> > <a ui-sref="projectInfo({ projectId: $ctrl.project.ProjectID })">Project {{ $ctrl.project.ProjectID }}</a>
 </div>
+
 <h2>Project {{$ctrl.project.ProjectID  }}</h2>
 <h4>Project Name: {{ $ctrl.project.Name }}</h4>
-<tbody>
 
 <p>Name: {{ $ctrl.project.Name }}</p>
 <p>Status: {{$ctrl.project.Status}}</p>
@@ -15,6 +15,11 @@
 <p>Contact Person: {{$ctrl.project.ContactPerson}}</p>
 <p>Project Manager: {{$ctrl.project.ProjectManager}}</p>
 <p>Contractors: {{$ctrl.project.Contractor}}</p>
+
+<div class="h-align-right">
+    <button ng-disabled="$ctrl.project.Status != 'closed'" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" ng-click="$ctrl.doArchive()">Archive Project</button>
+</div>
+
 <div>
     <h4>Works</h4>
     <!-- {"TypeOfWork": "scaffolding", "Status": "done"} -->

@@ -1,14 +1,22 @@
-function ProjectInfoController(ProjectService, $scope, $stateParams, AuthenticationService) {
+function ProjectInfoController(ProjectService, $scope, $stateParams, AuthenticationService, $state) {
   this.project = {};
 
   this.$onInit = () => {
     var projectId = $stateParams.projectId;
-    ProjectService.getProjects().then(projects => this.project = projects.filter(p => p.ProjectID == projectId)[0]);
+    ProjectService.getProject(projectId).then(p => this.project = p);
   };
 
   this.doComment = () => {
     this.project.Comments.push({Text: this.comment, Author: AuthenticationService.getUsername()});
     this.comment = '';
   };
+
+  this.doArchive = () => {
+    this.project.Status = 'archived';
+    $state.go('projectDirectory', {
+      buildingId: this.project.BuildingID
+    });
+    ProjectService.save(this.project);
+  }
 
 }
