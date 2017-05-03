@@ -24,8 +24,8 @@
     <tbody>
         <tr ng-repeat="$building in $ctrl.filteredBuildings()">
             <td>{{ $building.ID }}</td>
-            <td class="mdl-data-table__cell--non-numeric wrap">{{ $building.Owner }}</td>
-            <td class="mdl-data-table__cell--non-numeric wrap">{{ $building.Address }}</td>
+            <td class="mdl-data-table__cell--non-numeric wrap">{{ $building.Owner | limitTo: 20 }}</td>
+            <td class="mdl-data-table__cell--non-numeric wrap">{{ $building.Address | limitTo: 20 }}</td>
             <td class="mdl-data-table__cell--non-numeric">
                 <button ui-sref="buildingInfo.view({ id: $building.ID })" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
                     View
