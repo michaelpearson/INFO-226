@@ -23,6 +23,27 @@ function ConfigureRoutes($stateProvider, $urlRouterProvider) {
     controller: BuildingsController,
     authenticationLevel: [MANAGER, OWNER]
   }, {
+    name: 'buildingInfo',
+    abstract: true,
+    url: '/building/:id/',
+    template: '<div ui-view></div>',
+    resolve: {
+      building: function (BuildingService, $stateParams) {
+        return BuildingService.getBuilding($stateParams.id);
+      },
+      projects: function (ProjectService, $stateParams) {
+        if($stateParams.id == 'new') return [];
+        return ProjectService.getProjectsForBuilding($stateParams.id);
+      }
+    },
+    authenticationLevel: [MANAGER, OWNER]
+  }, {
+    name: 'buildingInfo.view',
+    url: 'view',
+    templateUrl: 'views/BuildingInfo/View/View.html',
+    controller: BuildingViewController,
+    authenticationLevel: [MANAGER, OWNER]
+  }, {
     name: 'projectDirectory',
     url: '/projectDirectory/:buildingId/',
     templateUrl: 'views/ProjectDirectory/ProjectDirectory.html',
