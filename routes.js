@@ -55,6 +55,12 @@ function ConfigureRoutes($stateProvider, $urlRouterProvider) {
     templateUrl: 'views/ProjectInfo/ProjectInfo.html',
     controller: ProjectInfoController,
     authenticationLevel: [MANAGER, OWNER]
+  }, {
+     name: 'projectEdit',
+     url: '/projectEdit/:projectId/',
+     templateUrl: 'views/ProjectEdit/ProjectEdit.html',
+     controller: ProjectEditController,
+     authenticationLevel: [MANAGER, OWNER]
   }];
 
   $urlRouterProvider.otherwise("/");
