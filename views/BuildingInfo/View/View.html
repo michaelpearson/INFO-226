@@ -6,6 +6,9 @@
     <h4>Building info:</h4>
     <p>Owner: {{ $ctrl.building.Owner }}</p>
     <p>Address: {{ $ctrl.building.Address }}</p>
+    <iframe src="{{ $ctrl.mapAddress }}">
+
+    </iframe>
     <div class="h-align-right h-padding-top">
         <button ui-sref="buildingInfo.edit({id: $ctrl.building.ID })" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
             Edit Building
