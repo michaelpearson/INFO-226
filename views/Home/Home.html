@@ -7,6 +7,5 @@
     <div class="home-login-button-container">
         <button ng-if="!$ctrl.loggedIn" ui-sref="login" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Login</button>
         <button ng-if="$ctrl.loggedIn" ui-sref="buildings.directory" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Building directory</button>
-        <button ng-if="$ctrl.loggedIn" ui-sref="buildings.projects.directory({buildingId: 123})" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Project list</button>
     </div>
 </div>
