@@ -18,37 +18,52 @@ function ConfigureRoutes($stateProvider, $urlRouterProvider) {
     authenticationLevel: ['*']
   }, {
     name: 'buildings',
-    url: '/buildings',
-    templateUrl: 'views/Buildings/Buildings.html',
-    controller: BuildingsController,
-    authenticationLevel: [MANAGER, OWNER]
-  }, {
-    name: 'buildingInfo',
     abstract: true,
-    url: '/building/:id/',
+    url: '/buildings',
     template: '<div ui-view></div>',
+    authenticationLevel: ['*']
+  }, {
+    name: 'buildings.directory',
+    url: '/directory',
+    templateUrl: 'views/Buildings/Directory/Directory.html',
+    controller: BuildingDirectoryController,
     resolve: {
-      building: function (BuildingService, $stateParams) {
-        return BuildingService.getBuilding($stateParams.id);
-      },
-      projects: function (ProjectService, $stateParams) {
-        if($stateParams.id == 'new') return [];
-        return ProjectService.getProjectsForBuilding($stateParams.id);
+      buildings : function (BuildingService) {
+        return BuildingService.getBuildingData();
       }
     },
-    authenticationLevel: [MANAGER, OWNER]
+    authenticationLevel: ['*']
   }, {
-    name: 'buildingInfo.view',
-    url: 'view',
-    templateUrl: 'views/BuildingInfo/View/View.html',
+    name: 'buildings.view',
+    url: '/view/:buildingId/',
+    templateUrl: 'views/Buildings/View/View.html',
     controller: BuildingViewController,
-    authenticationLevel: [MANAGER, OWNER]
+    resolve : {
+      building : function (BuildingService, $stateParams) {
+        return BuildingService.getBuilding($stateParams.buildingId);
+      },
+      projects : function (ProjectService, $stateParams) {
+        return ProjectService.getProjectsForBuilding($stateParams.buildingId);
+      }
+    },
+    authenticationLevel: ['*']
+  }, {
+    name: 'buildings.edit',
+    url: '/edit/:buildingId/',
+    templateUrl: 'views/Buildings/Edit/Edit.html',
+    controller: BuildingEditController,
+    resolve : {
+      building : function (BuildingService, $stateParams) {
+        return BuildingService.getBuilding($stateParams.buildingId);
+      }
+    },
+    authenticationLevel: ['*']
   }, {
     name: 'projectDirectory',
     url: '/projectDirectory/:buildingId/',
     templateUrl: 'views/ProjectDirectory/ProjectDirectory.html',
     controller: ProjectDirectoryController,
-    authenticationLevel: [MANAGER, OWNER]
+    authenticationLevel: ['*']
   }, {
     name: 'projectInfo',
     url: '/projectInfo/:projectId/',
@@ -65,16 +80,16 @@ function ConfigureRoutes($stateProvider, $urlRouterProvider) {
 
   $urlRouterProvider.otherwise("/");
   $stateProvider.decorator('data', function(state) {
-    state.resolve = state.resolve || {};
-    state.resolve.security = function ($q, AuthenticationService) {
-      var required = state.authenticationLevel;
-      var status = AuthenticationService.getLoginStatus();
-      if (Array.isArray(required) && (required.includes('*') || required.some((e) => e == status))) {
-        return;
-      }
-      console.log(required, status);
-      return $q.reject("Not Authorized");
-    };
+    // state.resolve = state.resolve || {};
+    // state.resolve.security = function ($q, AuthenticationService) {
+    //   var required = state.authenticationLevel;
+    //   var status = AuthenticationService.getLoginStatus();
+    //   if (Array.isArray(required) && (required.includes('*') || required.some((e) => e == status))) {
+    //     return;
+    //   }
+    //   console.log(required, status);
+    //   return $q.reject("Not Authorized");
+    // };
   });
 
   routes.forEach((e) => e.controllerAs = "$ctrl");

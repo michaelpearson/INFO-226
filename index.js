@@ -21,5 +21,8 @@ application.run(function ($rootScope, $state) {
     subtree: true
   });
 
-  $rootScope.$on('$stateChangeError', () => $state.go('unauthenticated'));
+  $rootScope.$on('$stateChangeError', function () {
+    console.error(arguments);
+    //$state.go('unauthenticated')
+  });
 });

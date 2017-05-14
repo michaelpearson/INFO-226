@@ -1,17 +1,12 @@
-<div class="home">
-    <h1>
-        Happy Buildings
-    </h1>
-    <div class="breadcrumb-container">
-        <a ui-sref="home">Home</a>
-    </div>
-    <div>
-        <p>Welcome to the Happy Buildings project management system. To get started click below!</p>
-        <div class="home-login-button-container">
-            <button ng-if="!$ctrl.loggedIn" ui-sref="login" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Login</button>
-            <button ng-if="$ctrl.loggedIn" ui-sref="buildings" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Building directory</button>
-            <button ng-if="$ctrl.loggedIn" ui-sref="projectDirectory({buildingId: 123})" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Project list</button>
-        </div>
-
+<h1>Happy Buildings</h1>
+<div class="breadcrumb-container">
+    <a ui-sref="home">Home</a>
+</div>
+<div>
+    <p>Welcome to the Happy Buildings project management system. To get started click below!</p>
+    <div class="home-login-button-container">
+        <button ng-if="!$ctrl.loggedIn" ui-sref="login" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Login</button>
+        <button ng-if="$ctrl.loggedIn" ui-sref="buildings.directory" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Building directory</button>
+        <button ng-if="$ctrl.loggedIn" ui-sref="projectDirectory({buildingId: 123})" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Project list</button>
     </div>
 </div>

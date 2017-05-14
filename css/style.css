@@ -120,3 +120,15 @@
 .comment-button-container {
     text-align: right;
 }
+
+.map-container iframe {
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+}
+
+.map-container {
+    width: 100%;
+    height: 500px;
+}

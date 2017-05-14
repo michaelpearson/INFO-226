@@ -1,6 +1,7 @@
 <h1>Building directory</h1>
 <div class="breadcrumb-container">
-    <a ui-sref="home">Home</a> > <a ui-sref="buildings">Building directory</a>
+    <a ui-sref="home">Home</a> >
+    <a ui-sref="buildings.directory">Building directory</a>
 </div>
 <h6>Select the building you would like to view or modify below. Or click 'New building' to create a new building</h6>
 <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
@@ -27,7 +28,7 @@
             <td class="mdl-data-table__cell--non-numeric wrap">{{ $building.Owner | limitTo: 20 }}</td>
             <td class="mdl-data-table__cell--non-numeric wrap">{{ $building.Address | limitTo: 20 }}</td>
             <td class="mdl-data-table__cell--non-numeric">
-                <button ui-sref="buildingInfo.view({ id: $building.ID })" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                <button ui-sref="buildings.view({ buildingId: $building.ID })" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
                     View
                 </button>
             </td>
@@ -35,7 +36,7 @@
     </tbody>
 </table>
 <div class="h-align-right h-padding-top">
-    <button ui-sref="buildingInfo.edit({id : 'new'})" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+    <button ui-sref="buildings.edit({buildingId : 'new'})" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
         New Building
     </button>
 </div>

@@ -1,7 +1,9 @@
 <h1>Projects</h1>
-
 <div class="breadcrumb-container">
-    <a ui-sref="home">Home</a> > <a ui-sref="buildings">Building directory</a> > <a ui-sref="buildingInfo.view({ id: $ctrl.buildingId })">Building</a> > <a ui-sref="projectDirectory({buildingId: $ctrl.buildingId})">Project Directory</a>
+    <a ui-sref="home">Home</a> >
+    <a ui-sref="buildings.directory">Building directory</a> >
+    <a ui-sref="buildings.view({ buildingId: $ctrl.buildingId })">Building</a> >
+    <a ui-sref="projectDirectory({buildingId: $ctrl.buildingId})">Project Directory</a>
 </div>
 
 <h2>List of Projects</h2>
@@ -23,8 +25,8 @@
         <tr ng-repeat="$project in $ctrl.projects">
             <td class="mdl-data-table__cell--non-numeric wrap">{{$project.Name}}</td>
             <td class="mdl-data-table__cell--non-numeric wrap">{{$project.Status}}</td>
-            <td class="mdl-data-table__cell--non-numeric wrap">{{$project.StartDate}}</td>
-            <td class="mdl-data-table__cell--non-numeric wrap">{{$project.EndDate}}</td>
+            <td class="mdl-data-table__cell--non-numeric wrap">{{$project.StartDate | date : 'medium'}}</td>
+            <td class="mdl-data-table__cell--non-numeric wrap">{{$project.EndDate | date : 'medium'}}</td>
             <td class="mdl-data-table__cell--non-numeric wrap">{{$project.ContactPerson}}</td>
             <td class="mdl-data-table__cell--non-numeric wrap">{{$project.Contractor}}</td>
             <td class="mdl-data-table__cell--non-numeric wrap">

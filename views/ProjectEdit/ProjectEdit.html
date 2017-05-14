@@ -1,9 +1,8 @@
 <h1>Project Edit</h1>
-
 <div class="breadcrumb-container">
     <a ui-sref="home">Home</a> >
-    <a ui-sref="buildings">Building directory</a> >
-    <a ui-sref="buildingInfo.view({ id: $ctrl.project.BuildingID })">Building</a> >
+    <a ui-sref="buildings.directory">Building directory</a> >
+    <a ui-sref="buildings.view({ buildingId: $ctrl.project.BuildingID })">Building</a> >
     <a ui-sref="projectDirectory({buildingId: $ctrl.project.BuildingID})">Project Directory</a> >
     <a ui-sref="projectInfo({ projectId: $ctrl.project.ProjectID })">Project {{ $ctrl.project.ProjectID }}</a> >
     <a ui-sref="projectEdit({ projectId: $ctrl.project.ProjectID })">Project Edit {{ $ctrl.project.ProjectID }}</a>
