@@ -2,9 +2,9 @@
 <div class="breadcrumb-container">
     <a ui-sref="home">Home</a> >
     <a ui-sref="buildings.directory">Building directory</a> >
-    <a ui-sref="buildings.view({ buildingId: $ctrl.project.BuildingID })">Building</a> >
-    <a ui-sref="projectDirectory({buildingId: $ctrl.project.BuildingID})">Project Directory</a> >
-    <a ui-sref="projectInfo({ projectId: $ctrl.project.ProjectID })">Project {{ $ctrl.project.ProjectID }}</a>
+    <a ui-sref="buildings.view({ buildingId: $ctrl.project.BuildingID })">Building {{ $ctrl.project.BuildingID }}</a> >
+    <a ui-sref="buildings.projects.directory({buildingId: $ctrl.project.BuildingID})">Project Directory</a> >
+    <a ui-sref="buildings.projects.view({ projectId: $ctrl.project.ProjectID })">Project {{ $ctrl.project.ProjectID }}</a>
 </div>
 
 <h2>Project {{$ctrl.project.ProjectID  }}</h2>
@@ -21,7 +21,7 @@
 
 <div class="h-align-right">
     <button ng-disabled="$ctrl.project.Status != 'closed'" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" ng-click="$ctrl.doArchive()">Archive Project</button>
-    <button ui-sref="projectEdit({projectId: $ctrl.project.ProjectID})" ng-disabled="$ctrl.hasEditAccess()" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Edit Project</button>
+    <button ui-sref="buildings.projects.edit({projectId: $ctrl.project.ProjectID})" ng-disabled="$ctrl.hasEditAccess()" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Edit Project</button>
 </div>
 
 <div>

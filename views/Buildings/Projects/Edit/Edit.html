@@ -1,0 +1,10 @@
+<h1>Project Edit</h1>
+<div class="breadcrumb-container">
+    <a ui-sref="home">Home</a> >
+    <a ui-sref="buildings.directory">Building directory</a> >
+    <a ui-sref="buildings.view({ buildingId: $ctrl.project.BuildingID })">Building {{ $ctrl.project.BuildingID }}</a> >
+    <a ui-sref="buildings.projects.directory({buildingId: $ctrl.project.BuildingID})">Project Directory</a> >
+    <a ui-sref="buildings.projects.view({ projectId: $ctrl.project.ProjectID })">Project {{ $ctrl.project.ProjectID }}</a> >
+    <a ui-sref="buildings.projects.edit({ projectId: $ctrl.project.ProjectID })">Project Edit {{ $ctrl.project.ProjectID }}</a>
+</div>
+

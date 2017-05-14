@@ -59,23 +59,44 @@ function ConfigureRoutes($stateProvider, $urlRouterProvider) {
     },
     authenticationLevel: ['*']
   }, {
-    name: 'projectDirectory',
-    url: '/projectDirectory/:buildingId/',
-    templateUrl: 'views/ProjectDirectory/ProjectDirectory.html',
-    controller: ProjectDirectoryController,
+    name: 'buildings.projects',
+    abstract: true,
+    url: '/projects',
+    template: '<div ui-view></div>',
     authenticationLevel: ['*']
   }, {
-    name: 'projectInfo',
-    url: '/projectInfo/:projectId/',
-    templateUrl: 'views/ProjectInfo/ProjectInfo.html',
-    controller: ProjectInfoController,
+    name: 'buildings.projects.directory',
+    url: '/:buildingId/directory/',
+    templateUrl: 'views/Buildings/Projects/Directory/Directory.html',
+    controller: ProjectDirectoryController,
+    resolve : {
+      projects : function (ProjectService, $stateParams) {
+        return ProjectService.getProjectsForBuilding($stateParams.buildingId);
+      }
+    },
+    authenticationLevel: ['*']
+  }, {
+    name: 'buildings.projects.view',
+    url: '/view/:projectId/',
+    templateUrl: 'views/Buildings/Projects/View/View.html',
+    controller: ProjectViewController,
+    resolve : {
+      project : function (ProjectService, $stateParams) {
+        return ProjectService.getProject($stateParams.projectId);
+      }
+    },
     authenticationLevel: [MANAGER, OWNER]
   }, {
-     name: 'projectEdit',
-     url: '/projectEdit/:projectId/',
-     templateUrl: 'views/ProjectEdit/ProjectEdit.html',
-     controller: ProjectEditController,
-     authenticationLevel: [MANAGER, OWNER]
+    name: 'buildings.projects.edit',
+    url: '/edit/:projectId/',
+    templateUrl: 'views/Buildings/Projects/Edit/Edit.html',
+    controller: ProjectEditController,
+    resolve : {
+      project : function (ProjectService, $stateParams) {
+        return ProjectService.getProject($stateParams.projectId);
+      }
+    },
+    authenticationLevel: [MANAGER, OWNER]
   }];
 
   $urlRouterProvider.otherwise("/");

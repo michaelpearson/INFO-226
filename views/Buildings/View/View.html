@@ -37,7 +37,7 @@
             <td>{{ $project.Status }}</td>
             <td>{{ $project.EndDate | date : 'medium' }}</td>
             <td>
-                <button ui-sref="projectInfo({projectId: $project.ProjectID})" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                <button ui-sref="buildings.projects.view({projectId: $project.ProjectID})" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
                     View
                 </button>
             </td>
@@ -50,7 +50,10 @@
         </tbody>
     </table>
     <div class="h-align-right h-padding-top">
-        <button ui-sref="project.edit({projectId: 'new', buildingId: $ctrl.building.ID})" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+        <button ui-sref="buildings.projects.directory({ buildingId: $ctrl.building.ID })" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+            View All projects
+        </button>
+        <button ui-sref="buildings.projects.edit({projectId: 'new', buildingId: $ctrl.building.ID})" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
             Add project
         </button>
     </div>
