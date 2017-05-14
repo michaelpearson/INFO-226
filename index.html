@@ -45,7 +45,7 @@
 
     <body ng-app="myApplication" ng-controller="applicationController as $ctrl">
         <div class="happy-buildings-layout mdl-layout mdl-layout--fixed-header mdl-js-layout mdl-color--grey-100">
-            <header class="demo-header mdl-layout__header mdl-layout__header--scroll mdl-color--grey-100 mdl-color-text--grey-800">
+            <header class="header mdl-layout__header mdl-layout__header--scroll mdl-color--grey-100 mdl-color-text--grey-800">
                 <div class="mdl-layout__header-row">
                     <span class="h-cursor-pointer mdl-layout-title" ui-sref="home">
                         Happy Buildings
@@ -61,20 +61,29 @@
                     </div>
                 </div>
             </header>
-            <div class="demo-ribbon"></div>
-            <div class="demo-main mdl-layout__content">
-                <div class="demo-container mdl-grid">
+            <div class="ribbon"></div>
+            <div class="main mdl-layout__content">
+                <div class="container mdl-grid">
                     <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
-                    <div class="demo-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col">
+                    <div class="content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col">
                         <ui-view></ui-view>
                     </div>
                 </div>
             </div>
-            <footer class="demo-footer mdl-mini-footer">
-                <div class="mdl-mini-footer--left-section">
-                    <ul class="mdl-mini-footer--link-list">
-                        <li><a ui-sref="home">Home</a></li>
-                    </ul>
+            <dialog class="mdl-dialog">
+                <h4 class="mdl-dialog__title">Authentication Error</h4>
+                <div class="mdl-dialog__content">
+                    <p>
+                        You don't seem to have access to this page.
+                    </p>
+                </div>
+                <div class="mdl-dialog__actions">
+                    <button type="button" class="mdl-button close" ng-click="$ctrl.dialog.close()">Ok</button>
+                </div>
+            </dialog>
+            <footer class="footer mdl-mini-footer">
+                <div>
+                    <a ui-sref="home">Home</a>
                 </div>
             </footer>
         </div>

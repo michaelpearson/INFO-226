@@ -12,11 +12,6 @@ function ConfigureRoutes($stateProvider, $urlRouterProvider) {
     controller: LoginController,
     authenticationLevel: ['*']
   }, {
-    name: 'unauthenticated',
-    url: '/loginrequired',
-    templateUrl: 'views/Unauthenticated/unauthenticated.html',
-    authenticationLevel: ['*']
-  }, {
     name: 'buildings',
     abstract: true,
     url: '/buildings',
@@ -28,34 +23,26 @@ function ConfigureRoutes($stateProvider, $urlRouterProvider) {
     templateUrl: 'views/Buildings/Directory/Directory.html',
     controller: BuildingDirectoryController,
     resolve: {
-      buildings : function (BuildingService) {
-        return BuildingService.getBuildingData();
-      }
+      buildings : (BuildingService) => BuildingService.getBuildingData()
     },
-    authenticationLevel: ['*']
+    authenticationLevel: [OWNER, MANAGER]
   }, {
     name: 'buildings.view',
     url: '/view/:buildingId/',
     templateUrl: 'views/Buildings/View/View.html',
     controller: BuildingViewController,
     resolve : {
-      building : function (BuildingService, $stateParams) {
-        return BuildingService.getBuilding($stateParams.buildingId);
-      },
-      projects : function (ProjectService, $stateParams) {
-        return ProjectService.getProjectsForBuilding($stateParams.buildingId);
-      }
+      building : (BuildingService, $stateParams) => BuildingService.getBuilding($stateParams.buildingId),
+      projects : (ProjectService, $stateParams) => ProjectService.getProjectsForBuilding($stateParams.buildingId)
     },
-    authenticationLevel: ['*']
+    authenticationLevel: [OWNER, MANAGER]
   }, {
     name: 'buildings.edit',
     url: '/edit/:buildingId/',
     templateUrl: 'views/Buildings/Edit/Edit.html',
     controller: BuildingEditController,
     resolve : {
-      building : function (BuildingService, $stateParams) {
-        return BuildingService.getBuilding($stateParams.buildingId);
-      }
+      building : (BuildingService, $stateParams) => BuildingService.getBuilding($stateParams.buildingId)
     },
     authenticationLevel: ['*']
   }, {
@@ -70,9 +57,7 @@ function ConfigureRoutes($stateProvider, $urlRouterProvider) {
     templateUrl: 'views/Buildings/Projects/Directory/Directory.html',
     controller: ProjectDirectoryController,
     resolve : {
-      projects : function (ProjectService, $stateParams) {
-        return ProjectService.getProjectsForBuilding($stateParams.buildingId);
-      }
+      projects : (ProjectService, $stateParams) => ProjectService.getProjectsForBuilding($stateParams.buildingId)
     },
     authenticationLevel: ['*']
   }, {
@@ -81,9 +66,7 @@ function ConfigureRoutes($stateProvider, $urlRouterProvider) {
     templateUrl: 'views/Buildings/Projects/View/View.html',
     controller: ProjectViewController,
     resolve : {
-      project : function (ProjectService, $stateParams) {
-        return ProjectService.getProject($stateParams.projectId);
-      }
+      project : (ProjectService, $stateParams) => ProjectService.getProject($stateParams.projectId)
     },
     authenticationLevel: [MANAGER, OWNER]
   }, {
@@ -92,25 +75,22 @@ function ConfigureRoutes($stateProvider, $urlRouterProvider) {
     templateUrl: 'views/Buildings/Projects/Edit/Edit.html',
     controller: ProjectEditController,
     resolve : {
-      project : function (ProjectService, $stateParams) {
-        return ProjectService.getProject($stateParams.projectId);
-      }
+      project : (ProjectService, $stateParams) => ProjectService.getProject($stateParams.projectId)
     },
     authenticationLevel: [MANAGER, OWNER]
   }];
 
   $urlRouterProvider.otherwise("/");
   $stateProvider.decorator('data', function(state) {
-    // state.resolve = state.resolve || {};
-    // state.resolve.security = function ($q, AuthenticationService) {
-    //   var required = state.authenticationLevel;
-    //   var status = AuthenticationService.getLoginStatus();
-    //   if (Array.isArray(required) && (required.includes('*') || required.some((e) => e == status))) {
-    //     return;
-    //   }
-    //   console.log(required, status);
-    //   return $q.reject("Not Authorized");
-    // };
+    state.resolve = state.resolve || {};
+    state.resolve.security = function ($q, AuthenticationService) {
+      var required = state.authenticationLevel;
+      var status = AuthenticationService.getLoginStatus();
+      if (Array.isArray(required) && (required.includes('*') || required.some((e) => e == status))) {
+        return;
+      }
+      return $q.reject("Not Authorized");
+    };
   });
 
   routes.forEach((e) => e.controllerAs = "$ctrl");

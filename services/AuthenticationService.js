@@ -19,7 +19,7 @@ function AuthenticationService() {
   this.getUsername = () => {
     var loginInfo = JSON.parse(localStorage.getItem('login')) || {};
     return loginInfo.username;
-  }
+  };
 
   this.isLoggedIn = () => this.getLoginStatus() != GUEST;
 
