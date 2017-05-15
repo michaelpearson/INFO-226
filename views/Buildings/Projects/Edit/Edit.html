@@ -8,3 +8,67 @@
     <a ui-sref="buildings.projects.edit({ projectId: $ctrl.project.ProjectID })">Project Edit {{ $ctrl.project.ProjectID }}</a>
 </div>
 
+
+<form>
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" type="text" ng-model="$ctrl.project.Name" id ="projectName">
+        <label  class="mdl-textfield__label" for="projectName">Name </label>
+    </div>
+
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <label class="form-label">Status </label><br />
+        <label class="mdl-radio mdl-js-radio" for="option1">
+            <input type="radio" ng-model="$ctrl.project.Status" value="open" class="mdl-radio__button" id="option1" name="status">
+            <span class="mdl-radio__label">open</span>
+        </label>
+        <label class="mdl-radio mdl-js-radio" for="option2">
+            <input type="radio" ng-model="$ctrl.project.Status" value="ready" class="mdl-radio__button" id="option2" name="status">
+            <span class="mdl-radio__label">ready</span>
+        </label>
+        <label class="mdl-radio mdl-js-radio" for="option3">
+            <input type="radio" ng-model="$ctrl.project.Status" value="closed" class="mdl-radio__button" id="option3" name="status">
+            <span class="mdl-radio__label">closed</span>
+        </label>
+    </div>
+
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" type="date" ng-model="$ctrl.project.StartDate" id ="projectStartDate">
+        <label  class="mdl-textfield__label" for="projectStartDate">Start Date </label>
+    </div>
+
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" type="date" ng-model="$ctrl.project.EndDate" id ="projectEndDate">
+        <label  class="mdl-textfield__label" for="projectEndDate">End Date </label>
+    </div>
+
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" type="text"  pattern="-?[0-9]*(\.[0-9]+)?" ng-model="$ctrl.project.BuildingID" id ="projectBuildingID">
+        <label  class="mdl-textfield__label" for="projectBuildingID">Building ID </label>
+        <span class="mdl-textfield__error">Input is not a number!</span>
+    </div>
+
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" type="text" ng-model="$ctrl.project.ContactPerson" id ="projectContact">
+        <label  class="mdl-textfield__label" for="projectContact">Contact Person </label>
+    </div>
+
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" type="text" ng-model="$ctrl.project.ProjectManager" id ="projectManager">
+        <label  class="mdl-textfield__label" for="projectManager">Project Manager </label>
+    </div>
+
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" type="text" ng-model="$ctrl.project.Contractor" id ="projectContractor">
+        <label  class="mdl-textfield__label" for="projectContractor">Contractors </label>
+    </div>
+
+    <div class="edit-project-button">
+        <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" ng-click="$ctrl.doUpdate()" value="Save" ui-sref ="buildings.projects.view({ projectId: $ctrl.project.ProjectID })">
+        Save
+        </button>
+    </div>
+
+</form>
+
+
+
