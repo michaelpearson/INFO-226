@@ -1,7 +1,15 @@
-function ProjectEditController (project, ProjectService) {
+function ProjectEditController (project, ProjectService, $stateParams, $state) {
   this.project = project;
 
-   this.doUpdate = () =>{
-    ProjectService.save(this.project);
+  if($stateParams.buildingId) {
+    this.project.BuildingID = $stateParams.buildingId;
+  }
+
+
+   this.doUpdate = () => {
+      ProjectService.save(this.project);
+      $state.go('buildings.projects.view', {
+        projectId: this.project.ProjectID
+      });
    }
 }

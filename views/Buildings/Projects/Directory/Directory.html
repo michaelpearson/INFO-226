@@ -5,7 +5,16 @@
     <a ui-sref="buildings.view({ buildingId: $ctrl.buildingId })">Building {{ $ctrl.buildingId }}</a> >
     <a ui-sref="buildings.projects.directory({buildingId: $ctrl.buildingId})">Project Directory</a>
 </div>
-
+<div>
+    <label>
+        Filter:
+        <select ng-model="$ctrl.filter">
+            <option ng-repeat="$statusType in $ctrl.getStatusTypes()" value="{{ $statusType }}">
+                {{ $statusType }}
+            </option>
+        </select>
+    </label>
+</div>
 <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp h-full-width">
     <thead>
         <tr>
@@ -20,7 +29,7 @@
     </thead>
 
     <tbody>
-        <tr ng-repeat="$project in $ctrl.projects">
+        <tr ng-repeat="$project in $ctrl.getProjects()">
             <td class="mdl-data-table__cell--non-numeric wrap">{{$project.Name}}</td>
             <td class="mdl-data-table__cell--non-numeric wrap">{{$project.Status}}</td>
             <td class="mdl-data-table__cell--non-numeric wrap">{{$project.StartDate | date : 'medium'}}</td>

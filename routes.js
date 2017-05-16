@@ -66,20 +66,28 @@ function ConfigureRoutes($stateProvider, $urlRouterProvider) {
     templateUrl: 'views/Buildings/Projects/View/View.html',
     controller: ProjectViewController,
     resolve : {
-      project : (ProjectService, $stateParams) => ProjectService.getProject($stateParams.projectId),
-      works : (ProjectService, $stateParams) => ProjectService.getWorksForProject($stateParams.projectId)
-    },
-    authenticationLevel: ['*']//chanege back to manager and owner
-  }, {
-    name: 'buildings.projects.edit',
-    url: '/edit/:projectId/',
-    templateUrl: 'views/Buildings/Projects/Edit/Edit.html',
-    controller: ProjectEditController,
-    resolve : {
       project : (ProjectService, $stateParams) => ProjectService.getProject($stateParams.projectId)
     },
-    authenticationLevel: [MANAGER, OWNER]
-  }];
+    authenticationLevel: ['*']
+  }, {
+     name: 'buildings.projects.edit',
+     url: '/edit/:projectId/',
+     templateUrl: 'views/Buildings/Projects/Edit/Edit.html',
+     controller: ProjectEditController,
+     resolve : {
+       project : (ProjectService, $stateParams) => ProjectService.getProject($stateParams.projectId)
+     },
+     authenticationLevel: [MANAGER, OWNER]
+   }, {
+     name: 'buildings.projects.new',
+     url: '/edit/:projectId/buildingId/:buildingId',
+     templateUrl: 'views/Buildings/Projects/Edit/Edit.html',
+     controller: ProjectEditController,
+     resolve : {
+       project : (ProjectService, $stateParams) => ProjectService.getProject($stateParams.projectId)
+     },
+     authenticationLevel: [MANAGER, OWNER]
+   }];
 
   $urlRouterProvider.otherwise("/");
   $stateProvider.decorator('data', function(state) {

@@ -1,6 +1,5 @@
-function ProjectViewController(project, works, ProjectService, AuthenticationService, $state) {
+function ProjectViewController(project, ProjectService, AuthenticationService, $state, $scope) {
   this.project = project;
-  this.works = works;
 
   this.doComment = () => {
     this.project.Comments.push({Text: this.comment, Author: AuthenticationService.getUsername()});
@@ -10,9 +9,16 @@ function ProjectViewController(project, works, ProjectService, AuthenticationSer
 
   this.doArchive = () => {
     this.project.Status = 'archived';
-    $state.go('buildings.projects.Directory', {
+    ProjectService.save(this.project);
+
+    $state.go('buildings.projects.directory', {
       buildingId: this.project.BuildingID
     });
-    ProjectService.save(this.project);
+
   }
+
+  this.$onInit = () => {
+    $scope.$watch(() => this.project.Works, () => ProjectService.save(this.project), true);
+  }
+
 }

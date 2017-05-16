@@ -28,35 +28,32 @@
     <h4>Works</h4>
     <!-- {"TypeOfWork": "scaffolding", "Status": "done"} -->
 
-    <!--<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp h-full-width">
+    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp h-full-width">
         <thead>
-        <tr>
-            <th>Type</th>
-            <th>Status</th>
-            <th></th>
-        </tr>
+            <tr>
+                <th>Type</th>
+                <th>Status</th>
+            </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="$work in $ctrl.works | orderBy:'+Type'">
-            <td>{{ $work.TypeOfWork }}</td>
-            <td>{{ $work.Status }}</td>
-            <td>
-                <button ui-sref="buildings.projects.view({projectId: $project.ProjectID})" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
-                    Edit
-                </button>
-            </td>
-        </tr>
-        <tr ng-if="!$ctrl.works.length">
-            <td colspan="5" class="h-center">
-                <span>No work found</span>
-            </td>
-        </tr>
+            <tr ng-repeat="$work in $ctrl.project.Works track by $index">
+                <td>{{ $work.TypeOfWork }}</td>
+                <td>
+                    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="completed_{{ $index }}">
+                        <input type="checkbox" id="completed_{{ $index }}" class="mdl-checkbox__input" ng-checked="$work.Status == 'done'" ng-model="$work.Status" ng-true-value="'done'" ng-false-value="'on-going'">
+                    </label>
+                </td>
+            </tr>
+            <tr ng-if="!$ctrl.project.Works.length">
+                <td colspan="2" class="h-center">
+                    <span>No work found</span>
+                </td>
+            </tr>
         </tbody>
-    </table>-->
-
-
-
-    <h5>Todo</h5>
+    </table>
+    <div class="h-align-right h-padding-top">
+        <button ui-sref="buildings.projects.works.edit({projectId: $ctrl.project.ProjectID, workId: 'new'})" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Add New Work</button>
+    </div>
 </div>
 
 <div>
