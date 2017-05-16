@@ -33,6 +33,15 @@ function ProjectService(ApiService) {
     //     .then((projects) => Array.isArray(projects) ? projects : []);
   };
 
+  this.getWorksForProject = (projectID) =>{
+    //var works = [];
+    var project = this.getProject(projectID);
+    if(project.$$state.status === 0){
+        return Promise.resolve(project.Works);
+    }
+    return Promise.reject();
+  };
+
   this.getProject = (id) => {
     for(var a = 0; a < this.mockData.length;a++) {
       if(this.mockData[a].ProjectID == id) {

@@ -27,6 +27,35 @@
 <div>
     <h4>Works</h4>
     <!-- {"TypeOfWork": "scaffolding", "Status": "done"} -->
+
+    <!--<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp h-full-width">
+        <thead>
+        <tr>
+            <th>Type</th>
+            <th>Status</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="$work in $ctrl.works | orderBy:'+Type'">
+            <td>{{ $work.TypeOfWork }}</td>
+            <td>{{ $work.Status }}</td>
+            <td>
+                <button ui-sref="buildings.projects.view({projectId: $project.ProjectID})" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                    Edit
+                </button>
+            </td>
+        </tr>
+        <tr ng-if="!$ctrl.works.length">
+            <td colspan="5" class="h-center">
+                <span>No work found</span>
+            </td>
+        </tr>
+        </tbody>
+    </table>-->
+
+
+
     <h5>Todo</h5>
 </div>
 

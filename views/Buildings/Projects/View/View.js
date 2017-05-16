@@ -1,5 +1,6 @@
-function ProjectViewController(project, ProjectService, AuthenticationService, $state) {
+function ProjectViewController(project, works, ProjectService, AuthenticationService, $state) {
   this.project = project;
+  this.works = works;
 
   this.doComment = () => {
     this.project.Comments.push({Text: this.comment, Author: AuthenticationService.getUsername()});

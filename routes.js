@@ -66,9 +66,10 @@ function ConfigureRoutes($stateProvider, $urlRouterProvider) {
     templateUrl: 'views/Buildings/Projects/View/View.html',
     controller: ProjectViewController,
     resolve : {
-      project : (ProjectService, $stateParams) => ProjectService.getProject($stateParams.projectId)
+      project : (ProjectService, $stateParams) => ProjectService.getProject($stateParams.projectId),
+      works : (ProjectService, $stateParams) => ProjectService.getWorksForProject($stateParams.projectId)
     },
-    authenticationLevel: [MANAGER, OWNER]
+    authenticationLevel: ['*']//chanege back to manager and owner
   }, {
     name: 'buildings.projects.edit',
     url: '/edit/:projectId/',
