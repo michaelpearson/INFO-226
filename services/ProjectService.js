@@ -1,10 +1,35 @@
 function ProjectService(ApiService) {
-  this.mockData = [
-    {"ProjectID": "1", "Name": "Scaffolding and painting.", "BuildingID": "123", "Status": "open", "StartDate": "2016-12-12T00:00:00", "EndDate": "2016-12-14T00:00:00", "ContactPerson": "Joe Bloggs", "ProjectManager": "Sally Smith", "Contractor": "ABC Company", "Works": [ {"TypeOfWork": "scaffolding", "Status": "done"}, {"TypeOfWork": "painting", "Status": "on-going"} ], "Comments": [ {"Author": "Johnny Guitar", "Text": "Work completed."}, {"Author": "John Doe", "Text": "Problem detected."}]},
-    {"ProjectID": "2", "Name": "Scaffolding and painting.", "BuildingID": "123", "Status": "ready", "StartDate": "2016-12-12T00:00:00", "EndDate": "2016-12-14T00:00:00", "ContactPerson": "Joe Bloggs", "ProjectManager": "Sally Smith", "Contractor": "ABC Company", "Works": [ {"TypeOfWork": "scaffolding", "Status": "done"}, {"TypeOfWork": "painting", "Status": "on-going"} ], "Comments": [ {"Author": "Johnny Guitar", "Text": "Work completed."}, {"Author": "John Doe", "Text": "Problem detected."}]},
-    {"ProjectID": "3", "Name": "Scaffolding and painting.", "BuildingID": "123", "Status": "closed", "StartDate": "2016-12-12T00:00:00", "EndDate": "2016-12-14T00:00:00", "ContactPerson": "Joe Bloggs", "ProjectManager": "Sally Smith", "Contractor": "ABC Company", "Works": [ {"TypeOfWork": "scaffolding", "Status": "done"}, {"TypeOfWork": "painting", "Status": "on-going"} ], "Comments": [ {"Author": "Johnny Guitar", "Text": "Work completed."}, {"Author": "John Doe", "Text": "Problem detected."}]},
-    {"ProjectID": "4", "Name": "Scaffolding and painting.", "BuildingID": "123", "Status": "closed", "StartDate": "2016-12-12T00:00:00", "EndDate": "2016-12-14T00:00:00", "ContactPerson": "Joe Bloggs", "ProjectManager": "Sally Smith", "Contractor": "ABC Company", "Works": [ {"TypeOfWork": "scaffolding", "Status": "done"}, {"TypeOfWork": "painting", "Status": "on-going"} ], "Comments": [ {"Author": "Johnny Guitar", "Text": "Work completed."}, {"Author": "John Doe", "Text": "Problem detected."}]}
-  ];
+  var endpoint = 'https://happybuildings.sim.vuw.ac.nz/api/' + ApiService.username + '/project.{id}.json';
+  var endpointUpdate = 'https://happybuildings.sim.vuw.ac.nz/api/pearsomich2/update.project.json';
+
+  this.projectCache = [];
+
+  this.minProjectId = 0;
+  this.maxProjectId = this.minProjectId;
+
+  this.resolveLoading = () => {};
+  this.projectResolver = new Promise((resolve, reject) => this.resolveLoading = resolve);
+
+  this.resolveNextProject = () => {
+    fetch(endpoint.replace(/{id}/gi, this.maxProjectId))
+      .then(r => {
+        if(r.ok) {
+          this.maxProjectId++;
+          return r;
+        }
+        throw "Last project";
+      })
+      .then(r => r.json())
+      .then((project) => this.projectCache.push(project))
+      .then(() => this.resolveNextProject())
+      .catch(() => this.resolveLoading());
+  };
+
+  this.resolveNextProject();
+
+  this.getNextProjectId = () => {
+    return this.maxProjectId;
+  };
 
   this.templateProject = () => {
     return {
@@ -20,49 +45,36 @@ function ProjectService(ApiService) {
       "Works": [],
       "Comments": []
     }
-  }
-
-  // var maxProjectId = 2;
-  // var endpoint = 'https://happybuildings.sim.vuw.ac.nz/api/' + ApiService.username + '/project.{id}.json';
-  //
-  // var resolvedProjects = [];
-  // var projectPromises = [];
-
-  // Enumerate all projects :/
-  // for(var a = 0;a < maxProjectId; a++) {
-  //   projectPromises.push(fetch(endpoint.replace(/{id}/gi, a)).then(r => r.json).then((project) => resolvedProjects.push(project)));
-  // }
-
+  };
 
   this.getProjectsForBuilding = (buildingId, includeArchived) => {
-    includeArchived = includeArchived || false;
-    var projects = [];
-    for(var a = 0; a < this.mockData.length;a++) {
-      if(this.mockData[a].BuildingID == buildingId) {
-        if(!includeArchived && this.mockData[a].Status == 'archived') {
-          continue;
+    return this.projectResolver.then(() => {
+      includeArchived = includeArchived || false;
+      var projects = [];
+      for(var a = 0; a < this.projectCache.length;a++) {
+        if(this.projectCache[a].BuildingID == buildingId) {
+          if(!includeArchived && this.projectCache[a].Status == 'archived') {
+            continue;
+          }
+          projects.push(this.parseProject(this.projectCache[a]));
         }
-        projects.push(this.parseProject(this.mockData[a]));
       }
-    }
-    return Promise.resolve(projects);
-
-    // return Promise
-    //     .all(projectPromises)
-    //     .then(() => resolvedProjects.filter(p => p.BuildingID == buildingId))
-    //     .then((projects) => Array.isArray(projects) ? projects : []);
+      return projects;
+    });
   };
 
   this.getProject = (id) => {
     if(id == 'new') {
       return this.templateProject();
     }
-    for(var a = 0; a < this.mockData.length;a++) {
-      if(this.mockData[a].ProjectID == id) {
-        return Promise.resolve(this.parseProject(this.mockData[a]));
+    return this.projectResolver.then(() => {
+      for(var a = 0; a < this.projectCache.length;a++) {
+        if(this.projectCache[a].ProjectID == id) {
+          return Promise.resolve(this.parseProject(this.projectCache[a]));
+        }
       }
-    }
-    return Promise.reject();
+      throw "Could not find project!";
+    });
   };
 
   this.parseProject = (projectObject) => {
@@ -71,20 +83,26 @@ function ProjectService(ApiService) {
     return projectObject;
   };
 
-  this.getNextProjectId = () => {
-    return Math.max.apply(null, this.mockData.map(p => parseInt(p.ProjectID))) + 1;
-  }
-
   this.save = (project) => {
-    if(project.ProjectID == 'new') {
-      project.ProjectID = this.getNextProjectId();
-      this.mockData.push(project);
-    }
-    for(var a = 0;a < this.mockData.length;a++) {
-      if(this.mockData[a].ProjectID == project.ProjectID) {
-        this.mockData[a] = project;
+    return this.projectResolver.then(() => {
+      if (project.ProjectID == 'new') {
+        project.ProjectID = this.getNextProjectId();
+        this.projectCache.push(project);
+      } else {
+        for (var a = 0; a < this.projectCache.length; a++) {
+          if (this.projectCache[a].ProjectID == project.ProjectID) {
+            this.projectCache[a] = project;
+          }
+        }
       }
-    }
+      return fetch(endpointUpdate, {
+        method: "POST",
+        body: JSON.stringify(project),
+        headers: {
+          'content-type': 'application/json'
+        }
+      });
+    });
   }
 }
 
