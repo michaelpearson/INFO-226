@@ -16,21 +16,19 @@
 
 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label has-placeholder h-block">
     <span class="mdl-textfield__label">Project Status</span>
-    <br />
-    <label class="mdl-radio mdl-js-radio" for="option1">
-        <input type="radio" ng-model="$ctrl.project.Status" value="open" class="mdl-radio__button" id="option1" name="status">
-        <span class="mdl-radio__label">Open</span>
-    </label>
-    <br />
-    <label class="mdl-radio mdl-js-radio" for="option2">
-        <input type="radio" ng-model="$ctrl.project.Status" value="ready" class="mdl-radio__button" id="option2" name="status">
-        <span class="mdl-radio__label">Ready</span>
-    </label>
-    <br />
-    <label class="mdl-radio mdl-js-radio" for="option3">
-        <input type="radio" ng-model="$ctrl.project.Status" value="closed" class="mdl-radio__button" id="option3" name="status">
-        <span class="mdl-radio__label">Closed</span>
-    </label>
+    <select class="mdl-textfield__input" ng-model="$ctrl.project.Status" id="filter">
+        <option  value="open" id="option1">
+        Open</option>
+
+        <option value="ready" id="option2">
+        Ready</option>
+
+        <option value="closed" id="option3">
+        Closed</option>
+
+        <option value="problem" id="option4">
+            Problem</option>
+    </select>
 </div>
 
 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label h-block">
