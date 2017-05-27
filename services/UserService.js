@@ -1,10 +1,9 @@
 function UserService(ApiService, $timeout) {
   var userListEndpoint = 'https://happybuildings.sim.vuw.ac.nz/api/' + ApiService.username + '/user_list.json';
   var users = [];
-
-  fetch(userListEndpoint)
+  var userListPromise = fetch(userListEndpoint)
       .then(r => r.json())
-      .then(r => users = r.users);
+      .then(r => users.push.apply(users, r.users));
 
   this.isInvalid = (username, password) => {
     return !username || !password || username == '' || password == '';
@@ -23,6 +22,17 @@ function UserService(ApiService, $timeout) {
     });
   };
 
+  var clone = (o) => {
+    return JSON.parse(JSON.stringify(o));
+  };
+
+  this.getUserList = () => {
+    if(users.length) {
+      return Promise.resolve(clone(users));
+    } else {
+      return userListPromise.then(() => clone(users));
+    }
+  }
 }
 
 application.service('UserService', UserService);

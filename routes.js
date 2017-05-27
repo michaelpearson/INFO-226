@@ -42,7 +42,8 @@ function ConfigureRoutes($stateProvider, $urlRouterProvider) {
     templateUrl: 'views/Buildings/Edit/Edit.html',
     controller: BuildingEditController,
     resolve : {
-      building : (BuildingService, $stateParams) => BuildingService.getBuilding($stateParams.buildingId)
+      building : (BuildingService, $stateParams) => BuildingService.getBuilding($stateParams.buildingId),
+      users : (UserService) => UserService.getUserList()
     },
     authenticationLevel: ['*']
   }, {
@@ -75,7 +76,8 @@ function ConfigureRoutes($stateProvider, $urlRouterProvider) {
      templateUrl: 'views/Buildings/Projects/Edit/Edit.html',
      controller: ProjectEditController,
      resolve : {
-       project : (ProjectService, $stateParams) => ProjectService.getProject($stateParams.projectId)
+       project : (ProjectService, $stateParams) => ProjectService.getProject($stateParams.projectId),
+       users : (UserService) => UserService.getUserList()
      },
      authenticationLevel: [MANAGER, OWNER]
    }, {

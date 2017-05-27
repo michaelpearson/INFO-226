@@ -1,13 +1,12 @@
-<h1>Project Edit</h1>
+<h1>{{$ctrl.isNew ? 'New' : 'Edit'}} Project</h1>
 <div class="breadcrumb-container">
     <a ui-sref="home">Home</a> >
     <a ui-sref="buildings.directory">Building directory</a> >
     <a ui-sref="buildings.view({ buildingId: $ctrl.project.BuildingID })">Building {{ $ctrl.project.BuildingID }}</a> >
     <a ui-sref="buildings.projects.directory({buildingId: $ctrl.project.BuildingID})">Project Directory</a> >
-    <a ui-sref="buildings.projects.view({ projectId: $ctrl.project.ProjectID })">Project {{ $ctrl.project.ProjectID }}</a> >
-    <a ui-sref="buildings.projects.edit({ projectId: $ctrl.project.ProjectID })">Project Edit {{ $ctrl.project.ProjectID }}</a>
+    <span ng-if="!$ctrl.isNew"><a ui-sref="buildings.projects.view({ projectId: $ctrl.project.ProjectID })">Project {{ $ctrl.project.ProjectID }}</a> ></span>
+    <a ui-sref="buildings.projects.edit({ projectId: $ctrl.project.ProjectID })">{{$ctrl.isNew ? 'New' : 'Edit'}} Project</a>
 </div>
-
 
 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
     <input class="mdl-textfield__input" type="text" ng-model="$ctrl.project.Name" id="projectName">
@@ -17,17 +16,10 @@
 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label has-placeholder h-block">
     <span class="mdl-textfield__label">Project Status</span>
     <select class="mdl-textfield__input" ng-model="$ctrl.project.Status" id="filter">
-        <option  value="open" id="option1">
-        Open</option>
-
-        <option value="ready" id="option2">
-        Ready</option>
-
-        <option value="closed" id="option3">
-        Closed</option>
-
-        <option value="problem" id="option4">
-            Problem</option>
+        <option value="open" id="option1">Open</option>
+        <option value="ready" id="option2">Ready</option>
+        <option value="closed" id="option3">Closed</option>
+        <option value="problem" id="option4">Problem</option>
     </select>
 </div>
 
@@ -52,13 +44,27 @@
 </div>
 
 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label h-block">
-    <input class="mdl-textfield__input" type="text" ng-model="$ctrl.project.ProjectManager" id="projectManager">
     <label class="mdl-textfield__label" for="projectManager">Project Manager</label>
+    <select class="mdl-textfield__input" ng-model="$ctrl.project.ProjectManager" id="projectManager">
+        <option value="Unknown user">
+            Unknown user
+        </option>
+        <option ng-repeat="$user in $ctrl.managers() track by $index" value="{{ $user.LoginName }}" ng-selected="$ctrl.building.Owner == $user.LoginName">
+            {{ $user.LoginName }}
+        </option>
+    </select>
 </div>
 
 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label h-block">
-    <input class="mdl-textfield__input" type="text" ng-model="$ctrl.project.Contractor" id="projectContractor">
-    <label class="mdl-textfield__label" for="projectContractor">Contractors</label>
+    <label class="mdl-textfield__label" for="projectContractor">Contractor</label>
+    <select class="mdl-textfield__input" ng-model="$ctrl.project.Contractor" id="projectContractor">
+        <option value="Unknown user">
+            Unknown user
+        </option>
+        <option ng-repeat="$user in $ctrl.contractors() track by $index" value="{{ $user.LoginName }}" ng-selected="$ctrl.building.Owner == $user.LoginName">
+            {{ $user.LoginName }}
+        </option>
+    </select>
 </div>
 
 <div class="edit-project-button h-align-right">
@@ -66,6 +72,3 @@
         Save
     </button>
 </div>
-
-
-

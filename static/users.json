@@ -1,0 +1,19 @@
+{
+  "users": [
+    {
+      "LoginName": "owner",
+      "Password": "a",
+      "UserType": "owner"
+    },
+    {
+      "LoginName": "manager",
+      "Password": "a",
+      "UserType": "manager"
+    },
+    {
+      "LoginName": "contractor",
+      "Password": "a",
+      "UserType": "contractor"
+    }
+  ]
+}

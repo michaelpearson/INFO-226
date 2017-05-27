@@ -1,8 +1,6 @@
-function BuildingService($timeout, ApiService) {
+function BuildingService(ApiService) {
   var endpoint = 'https://happybuildings.sim.vuw.ac.nz/api/' + ApiService.username + '/building_dir.json';
   var updateBuildingEndpoint = 'https://happybuildings.sim.vuw.ac.nz/api/' + ApiService.username + '/update.building.json';
-
-
 
   this.getBuildingData = () => {
     return fetch(endpoint).then(r => r.json()).then(r => r.buildings);

@@ -1,6 +1,7 @@
 var GUEST = 'guest';
 var MANAGER = 'manager';
 var OWNER = 'owner';
+var CONTRACTOR = 'contractor';
 
 function AuthenticationService() {
   this.setLoggedIn = (loginType, username) => {

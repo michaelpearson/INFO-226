@@ -31,7 +31,7 @@ var application = angular
 
 
 // Fix MDL lifecycle
-application.run(function ($rootScope, $state) {
+application.run(function ($rootScope) {
   var observer = new MutationObserver($rootScope.$evalAsync.bind($rootScope, () => componentHandler.upgradeDom()));
   observer.observe(document.body, {
     childList: true,

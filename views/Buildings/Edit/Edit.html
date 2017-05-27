@@ -1,7 +1,35 @@
-<h1>Building {{ $ctrl.building.ID }}</h1>
+<h1>{{ $ctrl.isNew ? 'New building' : 'Edit building'}}</h1>
 <div class="breadcrumb-container">
     <a ui-sref="home">Home</a> >
     <a ui-sref="buildings.directory">Building directory</a> >
-    <a ui-sref="buildings.view({buildingId: $ctrl.building.ID})">Building {{ $ctrl.building.ID }}</a> >
-    <a ui-sref="buildings.edit({buildingId: $ctrl.building.ID})">Edit building</a>
+    <span ng-if="!$ctrl.isNew"><a ui-sref="buildings.view({buildingId: $ctrl.building.ID})">Building {{ $ctrl.building.ID }}</a> ></span>
+    <a ui-sref="buildings.edit({buildingId: $ctrl.building.ID})">{{ $ctrl.isNew ? 'New building' : 'Edit building'}}</a>
+</div>
+<div class="h-field-container">
+    <form ng-submit="$ctrl.save()">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <label class="mdl-textfield__label" for="owner">Owner</label>
+            <select class="mdl-textfield__input" ng-model="$ctrl.building.Owner" id="owner">
+                <option value="Unknown user">
+                    Unknown user
+                </option>
+                <option ng-repeat="$user in $ctrl.users" value="{{ $user.LoginName }}" ng-selected="$ctrl.building.Owner == $user.LoginName">
+                    {{ $user.LoginName }}
+                </option>
+            </select>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="text" id="address" ng-model="$ctrl.building.Address">
+            <label class="mdl-textfield__label" for="address">address</label>
+        </div>
+        <div class="h-align-right h-padding">
+            <button type="button" ng-if="$ctrl.isNew" ui-sref="buildings.directory" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+                Cancel
+            </button>
+            <button type="button" ng-if="!$ctrl.isNew" ui-sref="buildings.view({buildingId: $ctrl.building.ID})" ui-sref-opts="{reload:true}" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+                Cancel
+            </button>
+            <input type="submit" value="Save" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" />
+        </div>
+    </form>
 </div>
