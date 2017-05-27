@@ -13,7 +13,7 @@
     </div>
 
     <div class="h-align-right h-padding-top">
-        <button ui-sref="buildings.edit({buildingId: $ctrl.building.ID })" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+        <button ng-if="$ctrl.hasBuildingWriteAccess" ui-sref="buildings.edit({buildingId: $ctrl.building.ID })" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
             Edit Building
         </button>
     </div>
@@ -53,7 +53,7 @@
         <button ui-sref="buildings.projects.directory({ buildingId: $ctrl.building.ID })" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
             View All projects
         </button>
-        <button ui-sref="buildings.projects.new({projectId: 'new', buildingId: $ctrl.building.ID})" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+        <button ng-if="$ctrl.canAddProject" ui-sref="buildings.projects.new({projectId: 'new', buildingId: $ctrl.building.ID})" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
             Add project
         </button>
     </div>

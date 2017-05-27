@@ -3,6 +3,8 @@ var application = angular
 .controller('applicationController', function (AuthenticationService, $state, $rootScope, $scope) {
   this.showSpinner = false;
   this.loggedIn = () => AuthenticationService.isLoggedIn();
+  this.username = () => AuthenticationService.getUsername();
+  this.userType = () => AuthenticationService.getLoginStatus();
   this.dialog = document.querySelector('dialog');
 
   this.logout = () => {
@@ -12,6 +14,7 @@ var application = angular
 
   $rootScope.$on('$stateChangeError', () => {
     this.dialog.showModal();
+    this.showSpinner = false;
   });
 
   $scope.$on('$stateChangeStart', (event, toState) => {

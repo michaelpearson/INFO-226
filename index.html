@@ -53,7 +53,7 @@
                     <div class="mdl-layout-spacer"></div>
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable is-upgraded">
                         <span ng-if="$ctrl.loggedIn()" class="h-cursor-pointer" ng-click="$ctrl.logout()">
-                            Logout
+                            Welcome {{ $ctrl.username() }} ({{ $ctrl.userType() }})
                         </span>
                         <span ng-if="!$ctrl.loggedIn()" class="h-cursor-pointer" ui-sref="login">
                             Login

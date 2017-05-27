@@ -36,7 +36,7 @@
     </tbody>
 </table>
 <div class="h-align-right h-padding-top">
-    <button ui-sref="buildings.edit({buildingId : 'new'})" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+    <button ng-if="$ctrl.canAddBuilding" ui-sref="buildings.edit({buildingId : 'new'})" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
         New Building
     </button>
 </div>

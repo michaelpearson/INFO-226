@@ -1,4 +1,4 @@
-function ProjectService(ApiService) {
+function ProjectService(ApiService, AuthenticationService) {
   var endpoint = 'https://happybuildings.sim.vuw.ac.nz/api/' + ApiService.username + '/project.{id}.json';
   var endpointUpdate = 'https://happybuildings.sim.vuw.ac.nz/api/pearsomich2/update.project.json';
 
@@ -56,6 +56,9 @@ function ProjectService(ApiService) {
           if(!includeArchived && this.projectCache[a].Status == 'archived') {
             continue;
           }
+          if(!this.canViewProject(this.projectCache[a])) {
+            continue;
+          }
           projects.push(this.parseProject(this.projectCache[a]));
         }
       }
@@ -69,7 +72,7 @@ function ProjectService(ApiService) {
     }
     return this.projectResolver.then(() => {
       for(var a = 0; a < this.projectCache.length;a++) {
-        if(this.projectCache[a].ProjectID == id) {
+        if(this.projectCache[a].ProjectID == id && this.canViewProject(this.projectCache[a])) {
           return Promise.resolve(this.parseProject(this.projectCache[a]));
         }
       }
@@ -103,7 +106,42 @@ function ProjectService(ApiService) {
         }
       });
     });
+  };
+
+  this.canViewProject = (project) => {
+    var loginType = AuthenticationService.getLoginStatus();
+    switch(loginType) {
+      case OWNER:
+      case MANAGER:
+        return true;
+      case CONTRACTOR:
+        return project.Contractor === AuthenticationService.getUsername();
+    }
+  };
+
+  this.canAddProject = () => {
+    var loginType = AuthenticationService.getLoginStatus();
+    switch(loginType) {
+      case MANAGER:
+        return true;
+      case OWNER:
+      case CONTRACTOR:
+        return false;
+    }
+  };
+
+  this.canEditProject = () => {
+    var loginType = AuthenticationService.getLoginStatus();
+    switch(loginType) {
+      case MANAGER:
+        return true;
+      case OWNER:
+      case CONTRACTOR:
+        return false;
+    }
   }
+
+
 }
 
 application.service('ProjectService', ProjectService);

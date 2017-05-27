@@ -1,5 +1,6 @@
-function BuildingDirectoryController(buildings) {
-  this.buildings = buildings;
+function BuildingDirectoryController(buildings, BuildingService) {
+  this.buildings = buildings || [];
+  this.canAddBuilding = BuildingService.canAddBuilding();
   this.filter = '';
 
   this.filteredBuildings = () => {

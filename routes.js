@@ -16,7 +16,7 @@ function ConfigureRoutes($stateProvider, $urlRouterProvider) {
     abstract: true,
     url: '/buildings',
     template: '<div ui-view></div>',
-    authenticationLevel: ['*']
+    authenticationLevel: [OWNER, MANAGER, CONTRACTOR]
   }, {
     name: 'buildings.directory',
     url: '/directory',
@@ -25,7 +25,7 @@ function ConfigureRoutes($stateProvider, $urlRouterProvider) {
     resolve: {
       buildings : (BuildingService) => BuildingService.getBuildingData()
     },
-    authenticationLevel: [OWNER, MANAGER]
+    authenticationLevel: [OWNER, MANAGER, CONTRACTOR]
   }, {
     name: 'buildings.view',
     url: '/view/:buildingId/',
@@ -35,7 +35,7 @@ function ConfigureRoutes($stateProvider, $urlRouterProvider) {
       building : (BuildingService, $stateParams) => BuildingService.getBuilding($stateParams.buildingId),
       projects : (ProjectService, $stateParams) => ProjectService.getProjectsForBuilding($stateParams.buildingId)
     },
-    authenticationLevel: [OWNER, MANAGER]
+    authenticationLevel: [OWNER, MANAGER, CONTRACTOR]
   }, {
     name: 'buildings.edit',
     url: '/edit/:buildingId/',
@@ -45,13 +45,13 @@ function ConfigureRoutes($stateProvider, $urlRouterProvider) {
       building : (BuildingService, $stateParams) => BuildingService.getBuilding($stateParams.buildingId),
       users : (UserService) => UserService.getUserList()
     },
-    authenticationLevel: ['*']
+    authenticationLevel: [OWNER, MANAGER, CONTRACTOR]
   }, {
     name: 'buildings.projects',
     abstract: true,
     url: '/projects',
     template: '<div ui-view></div>',
-    authenticationLevel: ['*']
+    authenticationLevel: [OWNER, MANAGER, CONTRACTOR]
   }, {
     name: 'buildings.projects.directory',
     url: '/:buildingId/directory/',
@@ -60,7 +60,7 @@ function ConfigureRoutes($stateProvider, $urlRouterProvider) {
     resolve : {
       projects : (ProjectService, $stateParams) => ProjectService.getProjectsForBuilding($stateParams.buildingId)
     },
-    authenticationLevel: ['*']
+    authenticationLevel: [OWNER, MANAGER, CONTRACTOR]
   }, {
     name: 'buildings.projects.view',
     url: '/view/:projectId/',
@@ -69,7 +69,7 @@ function ConfigureRoutes($stateProvider, $urlRouterProvider) {
     resolve : {
       project : (ProjectService, $stateParams) => ProjectService.getProject($stateParams.projectId)
     },
-    authenticationLevel: ['*']
+    authenticationLevel: [OWNER, MANAGER, CONTRACTOR]
   }, {
      name: 'buildings.projects.edit',
      url: '/edit/:projectId/',
@@ -79,7 +79,7 @@ function ConfigureRoutes($stateProvider, $urlRouterProvider) {
        project : (ProjectService, $stateParams) => ProjectService.getProject($stateParams.projectId),
        users : (UserService) => UserService.getUserList()
      },
-     authenticationLevel: [MANAGER, OWNER]
+     authenticationLevel: [OWNER, MANAGER, CONTRACTOR]
    }, {
      name: 'buildings.projects.new',
      url: '/edit/:projectId/buildingId/:buildingId',
@@ -88,7 +88,7 @@ function ConfigureRoutes($stateProvider, $urlRouterProvider) {
      resolve : {
        project : (ProjectService, $stateParams) => ProjectService.getProject($stateParams.projectId)
      },
-     authenticationLevel: [MANAGER, OWNER]
+     authenticationLevel: [OWNER, MANAGER, CONTRACTOR]
    }];
 
   $urlRouterProvider.otherwise("/");
