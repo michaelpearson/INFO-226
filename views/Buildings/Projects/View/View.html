@@ -32,18 +32,24 @@
             <tr>
                 <th>Type</th>
                 <th>Status</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="$work in $ctrl.project.Works track by $index">
+            <tr ng-repeat="$work in $ctrl.works track by $index">
                 <td>{{ $work.TypeOfWork }}</td>
                 <td>
                     <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="completed_{{ $index }}">
                         <input type="checkbox" id="completed_{{ $index }}" class="mdl-checkbox__input" ng-checked="$work.Status == 'done'" ng-model="$work.Status" ng-true-value="'done'" ng-false-value="'on-going'">
                     </label>
                 </td>
+                <td>
+                    <button ui-sref="buildings.projects.works.edit({ projectId: $project.project.ProjectID, workIndex: $index })" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                        View
+                    </button>
+                </td>
             </tr>
-            <tr ng-if="!$ctrl.project.Works.length">
+            <tr ng-if="!$ctrl.works.length">
                 <td colspan="2" class="h-center">
                     <span>No work found</span>
                 </td>
@@ -51,7 +57,7 @@
         </tbody>
     </table>
     <div class="h-align-right h-padding-top">
-        <button ng-if="$ctrl.canEditProject" ui-sref="buildings.projects.works.edit({projectId: $ctrl.project.ProjectID, workId: 'new'})" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Add New Work</button>
+        <button ng-if="$ctrl.canEditProject" ui-sref="buildings.projects.works.edit({projectId: $ctrl.project.ProjectID, workIndex: 'new'})" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Add New Work</button>
     </div>
 </div>
 

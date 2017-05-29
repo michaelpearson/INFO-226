@@ -1,5 +1,7 @@
-function ProjectViewController(project, ProjectService, AuthenticationService, $state, $scope) {
+function ProjectViewController(project, works, ProjectService, AuthenticationService, WorksService, $state, $scope) {
   this.project = project;
+  this.works = works;
+
   this.canEditProject = ProjectService.canEditProject();
 
   this.doComment = () => {
@@ -23,8 +25,10 @@ function ProjectViewController(project, ProjectService, AuthenticationService, $
   };
 
   this.$onInit = () => {
-    $scope.$watch(() => this.project.Works, () => {
-      ProjectService.save(this.project)
+    $scope.$watch(() => this.works, () => {
+      for(var a = 0; a < this.works.length; a++) {
+        WorksService.save(this.works[a]);
+      }
     }, true);
   }
 
