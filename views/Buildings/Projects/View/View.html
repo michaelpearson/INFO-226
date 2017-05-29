@@ -30,21 +30,23 @@
     <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp h-full-width">
         <thead>
             <tr>
+                <th>Index</th>
                 <th>Type</th>
                 <th>Status</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="$work in $ctrl.works track by $index">
+            <tr ng-repeat="$work in $ctrl.works">
+                <td>{{ $work.Index }}</td>
                 <td>{{ $work.TypeOfWork }}</td>
                 <td>
-                    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="completed_{{ $index }}">
-                        <input type="checkbox" id="completed_{{ $index }}" class="mdl-checkbox__input" ng-checked="$work.Status == 'done'" ng-model="$work.Status" ng-true-value="'done'" ng-false-value="'on-going'">
+                    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="completed_{{ $work.Index }}">
+                        <input type="checkbox" id="completed_{{ $work.Index }}" class="mdl-checkbox__input" ng-checked="$work.Status == 'done'" ng-model="$work.Status" ng-true-value="'done'" ng-false-value="'on-going'">
                     </label>
                 </td>
                 <td>
-                    <button ui-sref="buildings.projects.works.edit({ projectId: $project.project.ProjectID, workIndex: $index })" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                    <button ui-sref="buildings.projects.works.edit({ projectId: $project.project.ProjectID, workIndex: $work.Index })" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
                         View
                     </button>
                 </td>
