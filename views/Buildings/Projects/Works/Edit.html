@@ -1,4 +1,4 @@
-<h1>Works Edit</h1>
+<h1>{{ $ctrl.work.Index == 'new' ? 'New' : 'Edit' }} work</h1>
 <div class="breadcrumb-container">
     <a ui-sref="home">Home</a> >
     <a ui-sref="buildings.directory">Building directory</a> >
@@ -10,7 +10,7 @@
 
 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
     <input class="mdl-textfield__input" type="text" ng-model="$ctrl.work.TypeOfWork" id="typeOfWork">
-    <label class="mdl-textfield__label" for="typeOfWork">Type Of Work</label>
+    <label class="mdl-textfield__label" for="typeOfWork">Type of work</label>
 </div>
 
 <div>
@@ -20,14 +20,14 @@
 </div>
 
 <div class="edit-project-button h-align-right">
+    <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" ng-click="$ctrl.doRemove()" value="Save">
+        Delete
+    </button>
     <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" ng-click="$ctrl.doUpdate()" value="Save">
         Save
     </button>
-</div>
-
-<div class="edit-project-button h-align-right">
-    <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" ng-click="$ctrl.doRemove()" value="Save">
-        Delete
+    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" ui-sref="buildings.projects.view({ projectId: $ctrl.project.ProjectID })" value="Save">
+        Cancel
     </button>
 </div>
 

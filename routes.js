@@ -92,13 +92,19 @@ function ConfigureRoutes($stateProvider, $urlRouterProvider) {
      },
      authenticationLevel: [OWNER, MANAGER, CONTRACTOR]
    }, {
+    name: 'buildings.projects.works',
+    abstract: true,
+    url: '/edit/:projectId/work/',
+    template: '<div ui-view></div>',
+    authenticationLevel: [OWNER, MANAGER, CONTRACTOR]
+  }, {
      name: 'buildings.projects.works.edit',
-     url: '/work/edit/:workIndex/',
+     url: 'edit/:workIndex/',
      templateUrl: 'views/Buildings/Projects/Works/Edit.html',
-     controller: ProjectEditController,
+     controller: WorkEditController,
      resolve : {
        project : (ProjectService, $stateParams) => ProjectService.getProject($stateParams.projectId),
-       work : (WorkService, $stateParams) => WorkService.ProjectService($stateParams.projectId, $stateParams.workIndex),
+       work : (WorksService, $stateParams) => WorksService.getWorkByProjectAndIndex($stateParams.projectId, $stateParams.workIndex)
      },
      authenticationLevel: [OWNER, MANAGER, CONTRACTOR]
    }];

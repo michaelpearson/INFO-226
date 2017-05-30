@@ -1,4 +1,4 @@
-function WorkEditController (project, work, WorkService, $stateParams, $state) {
+function WorkEditController (work, project, WorksService, $stateParams, $state) {
   this.project = project;
   this.work = work;
 
@@ -7,26 +7,18 @@ function WorkEditController (project, work, WorkService, $stateParams, $state) {
   }**/
 
   this.doUpdate = () => {
-    WorkService.save(this.work).then(() => {
+    WorksService.save(this.work).then(() => {
       $state.go('buildings.projects.view', {
         projectId: this.project.ProjectID
       });
     });
   };
 
-  this.doRemove = () =>{
-    WorkService.remove(this.work).then(() => {
-       $state.go('buildings.projects.view', {
-         projectId: this.project.ProjectID
-       });
-     });
+  this.doRemove = () => {
+    WorksService.remove(this.work).then(() => {
+      $state.go('buildings.projects.view', {
+        projectId: this.project.ProjectID
+      });
+    });
   };
-
-  /**this.managers = () => {
-    return users.filter(u => u.UserType === MANAGER);
-  };
-
-  this.contractors = () => {
-    return users.filter(u => u.UserType === CONTRACTOR);
-  };**/
 }

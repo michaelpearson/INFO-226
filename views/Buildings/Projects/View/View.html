@@ -31,35 +31,35 @@
         <thead>
             <tr>
                 <th>Index</th>
-                <th>Type</th>
-                <th>Status</th>
+                <th class="mdl-data-table__cell--non-numeric">Type</th>
+                <th class="mdl-data-table__cell--non-numeric">Status</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="$work in $ctrl.works">
                 <td>{{ $work.Index }}</td>
-                <td>{{ $work.TypeOfWork }}</td>
-                <td>
+                <td class="mdl-data-table__cell--non-numeric">{{ $work.TypeOfWork }}</td>
+                <td class="mdl-data-table__cell--non-numeric">
                     <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="completed_{{ $work.Index }}">
-                        <input type="checkbox" id="completed_{{ $work.Index }}" class="mdl-checkbox__input" ng-checked="$work.Status == 'done'" ng-model="$work.Status" ng-true-value="'done'" ng-false-value="'on-going'">
+                        <input ng-disabled="!$ctrl.canEditWorks" type="checkbox" id="completed_{{ $work.Index }}" class="mdl-checkbox__input" ng-checked="$work.Status == 'done'" ng-model="$work.Status" ng-true-value="'done'" ng-false-value="'on-going'">
                     </label>
                 </td>
                 <td>
-                    <button ui-sref="buildings.projects.works.edit({ projectId: $project.project.ProjectID, workIndex: $work.Index })" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                    <button ng-disabled="!$ctrl.canEditWorks" ui-sref="buildings.projects.works.edit({ projectId: $ctrl.project.ProjectID, workIndex: $work.Index })" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
                         View
                     </button>
                 </td>
             </tr>
             <tr ng-if="!$ctrl.works.length">
-                <td colspan="2" class="h-center">
+                <td colspan="4" class="h-center">
                     <span>No work found</span>
                 </td>
             </tr>
         </tbody>
     </table>
-    <div class="h-align-right h-padding-top">
-        <button ng-if="$ctrl.canEditProject" ui-sref="buildings.projects.works.edit({projectId: $ctrl.project.ProjectID, workIndex: 'new'})" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Add New Work</button>
+    <div class="h-align-right h-padding-top" ng-if="$ctrl.canEditWorks">
+        <button ui-sref="buildings.projects.works.edit({projectId: $ctrl.project.ProjectID, workIndex: 'new'})" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Add New Work</button>
     </div>
 </div>
 

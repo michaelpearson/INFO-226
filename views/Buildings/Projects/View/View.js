@@ -3,6 +3,7 @@ function ProjectViewController(project, works, ProjectService, AuthenticationSer
   this.works = works;
 
   this.canEditProject = ProjectService.canEditProject();
+  this.canEditWorks = WorksService.canEditWorks();
 
   this.doComment = () => {
     this.project.Comments.push({Text: this.comment, Author: AuthenticationService.getUsername()});

@@ -68,7 +68,7 @@ function ProjectService(ApiService, AuthenticationService) {
 
   this.getProject = (id) => {
     if(id == 'new') {
-      return this.templateProject();
+      return Promise.resolve(this.templateProject());
     }
     return this.projectResolver.then(() => {
       for(var a = 0; a < this.projectCache.length;a++) {
