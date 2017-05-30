@@ -1,0 +1,34 @@
+<h1>Works Edit</h1>
+<div class="breadcrumb-container">
+    <a ui-sref="home">Home</a> >
+    <a ui-sref="buildings.directory">Building directory</a> >
+    <a ui-sref="buildings.view({ buildingId: $ctrl.project.BuildingID })">Building {{ $ctrl.project.BuildingID }}</a> >
+    <a ui-sref="buildings.projects.directory({buildingId: $ctrl.project.BuildingID})">Project Directory</a> >
+    <a ui-sref="buildings.projects.view({ projectId: $ctrl.project.ProjectID })">Project {{ $ctrl.project.ProjectID }}</a> >
+    <a ui-sref="buildings.projects.works.edit({ projectId: $project.project.ProjectID, workIndex: $work.Index })">Works Edit</a>
+</div>
+
+<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <input class="mdl-textfield__input" type="text" ng-model="$ctrl.work.TypeOfWork" id="typeOfWork">
+    <label class="mdl-textfield__label" for="typeOfWork">Type Of Work</label>
+</div>
+
+<div>
+    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="completed">
+        <input type="checkbox" id="completed" class="mdl-checkbox__input" ng-checked="$ctrl.work.Status == 'done'" ng-model="$ctrl.work.Status" ng-true-value="'done'" ng-false-value="'on-going'">
+    </label>
+</div>
+
+<div class="edit-project-button h-align-right">
+    <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" ng-click="$ctrl.doUpdate()" value="Save">
+        Save
+    </button>
+</div>
+
+<div class="edit-project-button h-align-right">
+    <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" ng-click="$ctrl.doRemove()" value="Save">
+        Delete
+    </button>
+</div>
+
+

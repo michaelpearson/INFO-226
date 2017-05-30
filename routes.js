@@ -91,6 +91,16 @@ function ConfigureRoutes($stateProvider, $urlRouterProvider) {
        users : (UserService) => UserService.getUserList()
      },
      authenticationLevel: [OWNER, MANAGER, CONTRACTOR]
+   }, {
+     name: 'buildings.projects.works.edit',
+     url: '/work/edit/:workIndex/',
+     templateUrl: 'views/Buildings/Projects/Works/Edit.html',
+     controller: ProjectEditController,
+     resolve : {
+       project : (ProjectService, $stateParams) => ProjectService.getProject($stateParams.projectId),
+       work : (WorkService, $stateParams) => WorkService.ProjectService($stateParams.projectId, $stateParams.workIndex),
+     },
+     authenticationLevel: [OWNER, MANAGER, CONTRACTOR]
    }];
 
   $urlRouterProvider.otherwise("/");

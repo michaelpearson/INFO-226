@@ -38,6 +38,11 @@ function WorksService(ProjectService) {
         });
     };
 
+    this.remove = (work) => {
+        //remove stuff
+
+    };
+
     this.equals = (a, b) => {
         return a.TypeOfWork === b.TypeOfWork && a.Status === b.Status;
     };
