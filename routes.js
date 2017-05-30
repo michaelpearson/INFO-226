@@ -87,7 +87,8 @@ function ConfigureRoutes($stateProvider, $urlRouterProvider) {
      templateUrl: 'views/Buildings/Projects/Edit/Edit.html',
      controller: ProjectEditController,
      resolve : {
-       project : (ProjectService, $stateParams) => ProjectService.getProject($stateParams.projectId)
+       project : (ProjectService, $stateParams) => ProjectService.getProject($stateParams.projectId),
+       users : (UserService) => UserService.getUserList()
      },
      authenticationLevel: [OWNER, MANAGER, CONTRACTOR]
    }];
