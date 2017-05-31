@@ -1,17 +1,32 @@
 {
   "users": [
     {
-      "LoginName": "owner",
+      "LoginName": "owner1",
       "Password": "a",
       "UserType": "owner"
     },
     {
-      "LoginName": "manager",
+      "LoginName": "manager1",
       "Password": "a",
       "UserType": "manager"
     },
     {
-      "LoginName": "contractor",
+      "LoginName": "contractor1",
+      "Password": "a",
+      "UserType": "contractor"
+    },
+    {
+      "LoginName": "owner2",
+      "Password": "a",
+      "UserType": "owner"
+    },
+    {
+      "LoginName": "manager2",
+      "Password": "a",
+      "UserType": "manager"
+    },
+    {
+      "LoginName": "contractor2",
       "Password": "a",
       "UserType": "contractor"
     }

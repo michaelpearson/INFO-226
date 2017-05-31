@@ -1,5 +1,6 @@
 function UserService(ApiService, $timeout) {
-  var userListEndpoint = 'https://happybuildings.sim.vuw.ac.nz/api/' + ApiService.username + '/user_list.json';
+  //var userListEndpoint = 'https://happybuildings.sim.vuw.ac.nz/api/' + ApiService.username + '/user_list.json';
+  var userListEndpoint = 'static/user_list.json';
   var users = [];
   var userListPromise = fetch(userListEndpoint)
       .then(r => r.json())
